@@ -1,0 +1,159 @@
+{% load static i18n %}
+<!DOCTYPE html>
+<html lang="{{ LANGUAGE_CODE }}">
+<head>
+  <meta charset="UTF-8">
+  <title>{% trans "Teacher" %} – {% trans "Register" %}</title>
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+  <style>
+    .screen{
+      padding-left:16px !important;
+      padding-right:16px !important;
+      box-sizing:border-box !important;
+      align-items: stretch;
+    }
+
+    .auth-wrap{
+      width:100%;
+      max-width: 392px;
+      margin: 0 auto;
+      display:flex;
+      flex-direction:column;
+      gap:14px;
+      padding-top: 10px;
+    }
+
+    .auth-header{
+      width:100%;
+      padding:18px 16px;
+      border-radius:22px;
+      background: linear-gradient(180deg, #38bdf8, #2563eb);
+      color:#fff;
+      text-align:center;
+      box-shadow:0 16px 30px rgba(37,99,235,.22);
+    }
+
+    .auth-title{
+      margin:0;
+      font-size:22px;
+      font-weight:900;
+      line-height:1.1;
+    }
+
+    .auth-subtitle{
+      margin:6px 0 0;
+      font-size:13px;
+      font-weight:700;
+      opacity:.9;
+    }
+
+    .auth-card{
+      width:100%;
+      background: rgba(255,255,255,.78);
+      border:1px solid rgba(148,163,184,.28);
+      border-radius:20px;
+      padding:16px;
+      box-shadow:0 12px 24px rgba(148,163,184,.45);
+    }
+
+    /* делаем поля чуть “премиальнее”, но не ломаем style.css */
+    .form-group{ margin-bottom:12px; }
+    .form-label{ font-weight:800; }
+
+    .btn-primary{
+      width:100%;
+      border-radius:999px !important;
+      padding:14px 18px !important;
+      font-weight:900 !important;
+    }
+
+    .auth-errors{
+      width:100%;
+      border-radius:16px;
+      padding:12px 14px;
+    }
+
+    .auth-bottom{
+      text-align:center;
+      margin-top: 12px;
+      color:#334155;
+      font-weight:700;
+    }
+
+    .btn-link{
+      display:inline-block;
+      margin-top: 6px;
+      font-weight:900;
+    }
+  </style>
+</head>
+
+<body>
+<div class="phone">
+  <div class="phone__top"></div>
+
+  <div class="screen">
+
+    <div class="auth-wrap">
+
+      <div class="auth-header">
+        <h1 class="auth-title">{% trans "Register" %}</h1>
+        <div class="auth-subtitle">{% trans "Teacher account" %}</div>
+      </div>
+
+      {% if error %}
+        <div class="auth-errors"><div>{{ error }}</div></div>
+      {% endif %}
+
+      <div class="auth-card">
+        <form class="form-wrapper" method="post" action="{% url 'teacher_register' %}">
+          {% csrf_token %}
+
+          <div class="form-group">
+            <label class="form-label">{% trans "Username" %}*</label>
+            <input type="text"
+                   class="form-input"
+                   name="username"
+                   placeholder="{% trans 'username' %}"
+                   required>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">{% trans "Email" %}*</label>
+            <input type="email"
+                   class="form-input"
+                   name="email"
+                   placeholder="{% trans 'email' %}"
+                   required>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">{% trans "Password" %}*</label>
+            <input type="password"
+                   class="form-input"
+                   name="password"
+                   placeholder="{% trans 'password' %}"
+                   required>
+          </div>
+
+          <button type="submit" class="btn-primary">
+            {% trans "Register" %}
+          </button>
+        </form>
+
+        <div class="auth-bottom">
+          {% trans "Already have an account?" %}
+          <br>
+          <a href="{% url 'teacher_login' %}" class="btn-link">{% trans "Login" %}</a>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="phone__bottom"></div>
+</div>
+</body>
+</html>

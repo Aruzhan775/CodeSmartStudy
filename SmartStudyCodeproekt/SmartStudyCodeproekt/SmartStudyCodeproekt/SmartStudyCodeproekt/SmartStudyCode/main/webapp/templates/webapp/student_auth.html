@@ -1,0 +1,29 @@
+{% load static i18n %}
+<!DOCTYPE html>
+<html lang="{{ LANGUAGE_CODE }}">
+<head>
+    <meta charset="UTF-8">
+    <title>{% trans "Student" %} – {% trans "Auth choice" %}</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+
+<div class="phone">
+    <div class="phone__top"></div>
+
+    <div class="screen auth-screen">
+        <div class="logo-text">
+            <span class="logo-code">Code</span><span class="logo-smart">Smart</span><span class="logo-study">Study</span>
+        </div>
+
+        <div class="auth-buttons">
+            <a href="/student/login/" class="btn btn-outline full-width auth-btn">{% trans "Sign in" %}</a>
+            <a href="/student/register/" class="btn btn-outline full-width auth-btn">{% trans "Registration" %}</a>
+        </div>
+    </div>
+
+    <div class="phone__bottom"></div>
+</div>
+
+</body>
+</html>

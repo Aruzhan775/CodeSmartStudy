@@ -1,0 +1,133 @@
+{% load static i18n %}
+<!DOCTYPE html>
+<html lang="{{ LANGUAGE_CODE }}">
+<head>
+  <meta charset="UTF-8">
+  <title>{% trans "Basic attempt preview" %}</title>
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <style>
+    .screen{ padding:16px !important; box-sizing:border-box !important; }
+
+    .page-title{
+      font-size:22px;
+      font-weight:900;
+      text-align:center;
+      margin:6px 0 12px;
+      color:#0b1220;
+    }
+
+    .card{
+      width:100%;
+      background:#fff;
+      border-radius:18px;
+      padding:16px;
+      box-shadow:0 10px 22px rgba(15,23,42,.10);
+      margin:10px 0;
+      box-sizing:border-box;
+    }
+
+    .meta p{
+      margin:6px 0 !important;
+      font-weight:800;
+      color:#0f172a;
+      position:static !important;
+      transform:none !important;
+    }
+
+    .q-title{
+      font-size:16px;
+      font-weight:900;
+      margin:0 0 10px !important;
+      color:#0b1220;
+      position:static !important;
+      transform:none !important;
+    }
+
+    .pill{
+      display:inline-block;
+      padding:4px 10px;
+      border-radius:999px;
+      font-weight:900;
+      font-size:12px;
+      margin:0 0 10px !important;
+      position:static !important;
+      transform:none !important;
+    }
+    .pill.ok{ background:#dcfce7; color:#14532d; }
+    .pill.bad{ background:#fee2e2; color:#7f1d1d; }
+
+    .ans-lines{ margin-top:6px; display:flex; flex-direction:column; gap:8px; }
+
+    .ans-lines .line{
+      all: unset;
+      display:block !important;
+      font-size:14px !important;
+      font-weight:800 !important;
+      color:#0f172a !important;
+      line-height:1.45 !important;
+      white-space:normal !important;
+      overflow-wrap:anywhere !important;
+      word-break:break-word !important;
+    }
+
+    .ans-lines .muted{
+      all: unset;
+      font-weight:900 !important;
+      color:#334155 !important;
+    }
+  </style>
+</head>
+
+<body>
+<div class="phone">
+  <div class="phone__top"></div>
+
+  <div class="screen">
+    <div class="page-title">{% trans "Basic attempt preview" %}</div>
+
+    <div class="card meta">
+      <p><b>{% trans "Student" %}:</b> {{ student_name }}</p>
+      <p><b>{% trans "Group" %}:</b> {{ group_name }}</p>
+      <p><b>{% trans "Topic code" %}:</b> {{ topic_code }}</p>
+      <p><b>{% trans "Score" %}:</b> {{ score }} / 100</p>
+      <p><b>{% trans "Started" %}:</b> {{ started_at|date:"d.m.Y H:i" }}</p>
+      <p><b>{% trans "Finished" %}:</b> {{ finished_at|date:"d.m.Y H:i" }}</p>
+    </div>
+
+    {% if rows %}
+      {% for r in rows %}
+        <div class="card">
+          <div class="q-title">
+            {% blocktrans with n=forloop.counter %}Q{{ n }}.{% endblocktrans %}
+            {{ r.q_text }}
+          </div>
+
+          <div class="pill {% if r.is_correct %}ok{% else %}bad{% endif %}">
+            {% if r.is_correct %}{% trans "Correct" %}{% else %}{% trans "Wrong" %}{% endif %}
+          </div>
+
+          <div class="ans-lines">
+            <div class="line">
+              {% trans "Student chose" %}:
+              <span class="muted">{{ r.chosen_letter }}</span> — {{ r.chosen_text }}
+            </div>
+            <div class="line">
+              {% trans "Correct answer" %}:
+              <span class="muted">{{ r.correct_letter }}</span> — {{ r.correct_text }}
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    {% else %}
+      <div class="card">
+        <b>{% trans "No answers saved for this attempt." %}</b>
+      </div>
+    {% endif %}
+
+    <a class="groups-btn-home" href="{{ back_url }}">{% trans "Back" %}</a>
+  </div>
+
+  <div class="phone__bottom"></div>
+</div>
+</body>
+</html>

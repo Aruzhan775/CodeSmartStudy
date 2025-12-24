@@ -1,0 +1,90 @@
+{% load static i18n %}
+<!DOCTYPE html>
+<html lang="{{ LANGUAGE_CODE }}">
+<head>
+  <meta charset="UTF-8">
+  <title>{% trans "Student – Progress" %}</title>
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <style>
+    /* твой CSS оставил как есть */
+    .progress-title{ font-size:34px; font-weight:900; margin:8px 0 18px; text-align:center; }
+    .stats-grid{ width:100%; display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-bottom:18px; }
+    .stat-card{ width:100%; background:#bbf7d0; border-radius:18px; padding:18px 14px; box-shadow:0 12px 24px rgba(148,163,184,.55); display:flex; flex-direction:column; align-items:center; justify-content:center; min-height:96px; text-align:center; }
+    .stat-title{ font-weight:800; color:#14532d; font-size:14px; margin-bottom:6px; }
+    .stat-value{ font-weight:900; font-size:28px; color:#14532d; line-height:1; }
+    .history-title{ width:100%; font-size:22px; font-weight:900; margin:8px 0 10px; }
+    .history-box{ width:100%; display:flex; flex-direction:column; gap:10px; margin-bottom:18px; }
+    .history-row{ width:100%; background:rgba(255,255,255,.75); border-radius:16px; padding:14px 14px; box-shadow:0 10px 22px rgba(15,23,42,.08); display:flex; flex-direction:column; gap:6px; position:relative; overflow:hidden; }
+    .history-row b{ font-weight:900; }
+    .history-meta{ display:flex; justify-content:space-between; gap:10px; flex-wrap:wrap; color:#475569; font-size:12px; font-weight:700; }
+    .history-empty{ width:100%; text-align:center; color:#475569; padding:12px 0; font-weight:600; }
+    .back-big{ width:100%; display:flex; justify-content:center; align-items:center; padding:16px 0; border-radius:999px; font-size:18px; font-weight:800; text-decoration:none; background:#ef4444; color:#fff; box-shadow:0 14px 28px rgba(15,23,42,.18); margin-top:10px; }
+    .kind-badge{ display:inline-flex; align-items:center; justify-content:center; padding:4px 10px; border-radius:999px; font-size:11px; font-weight:900; letter-spacing:.2px; width:max-content; }
+    .kind-basic{ background:#dbeafe; color:#1e3a8a; border:1px solid rgba(30,58,138,.18); }
+    .kind-teacher{ background:#fee2e2; color:#991b1b; border:1px solid rgba(153,27,27,.18); }
+  </style>
+</head>
+<body>
+
+<div class="phone">
+  <div class="phone__top"></div>
+
+  <div class="screen">
+
+    <h1 class="progress-title">{% trans "My progress" %}</h1>
+
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-title">{% trans "Total attempts" %}</div>
+        <div class="stat-value">{{ total_attempts }}</div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-title">{% trans "Completed tests" %}</div>
+        <div class="stat-value">{{ completed_tests }}</div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-title">{% trans "Average score" %}</div>
+        <div class="stat-value">{{ avg_score|floatformat:1 }}</div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-title">{% trans "Best result" %}</div>
+        <div class="stat-value">{{ best_result|floatformat:1 }}</div>
+      </div>
+    </div>
+
+    <div class="history-title">{% trans "History" %}</div>
+
+    <div class="history-box">
+      {% for h in history %}
+        <div class="history-row">
+
+          <div class="kind-badge {% if h.kind == 'basic' %}kind-basic{% else %}kind-teacher{% endif %}">
+            {% if h.kind == "basic" %}{% trans "Basic test" %}{% else %}{% trans "Teacher test" %}{% endif %}
+          </div>
+
+          <div><b>{{ h.title }}</b></div>
+
+          <div class="small-text">{% trans "Topic" %}: {{ h.topic }}</div>
+
+          <div class="history-meta">
+            <span>{% trans "Date" %}: {{ h.dt|date:"d.m.Y H:i" }}</span>
+            <span>{% trans "Score" %}: {{ h.score }}</span>
+          </div>
+        </div>
+      {% empty %}
+        <div class="history-empty">{% trans "You haven't taken any tests yet." %}</div>
+      {% endfor %}
+    </div>
+
+    <a href="{% url 'student_profile' %}" class="back-big">{% trans "Back" %}</a>
+
+  </div>
+
+  <div class="phone__bottom"></div>
+</div>
+
+</body>
+</html>

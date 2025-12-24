@@ -1,0 +1,178 @@
+{% load static i18n %}
+<!DOCTYPE html>
+<html lang="{{ LANGUAGE_CODE }}">
+<head>
+  <meta charset="UTF-8">
+  <title>{% trans "Teacher" %} – {% trans "Main menu" %}</title>
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+  <style>
+    .screen{
+      padding-left:16px !important;
+      padding-right:16px !important;
+      box-sizing:border-box !important;
+    }
+
+    .top-icons{
+      width:100%;
+      display:grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap:12px;
+      margin:10px 0 14px;
+    }
+
+    .top-icon{
+      background:#eef4ff;
+      border-radius:18px;
+      padding:14px 10px 12px;
+      text-decoration:none;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+
+      box-shadow:0 12px 24px rgba(148,163,184,.45);
+      border:1px solid rgba(148,163,184,.35);
+      transition: transform .12s ease, box-shadow .12s ease, filter .12s ease;
+    }
+    .top-icon:hover{
+      transform: translateY(-2px);
+      box-shadow:0 18px 30px rgba(148,163,184,.6);
+      filter: brightness(0.99);
+    }
+
+    .top-icon img{
+      width:64px;
+      height:64px;
+      object-fit:contain;
+      filter: drop-shadow(0 10px 14px rgba(15,23,42,.14));
+    }
+
+    .icon-label{
+      font-size:13px;
+      font-weight:900;
+      color:#0f172a;
+      text-align:center;
+      line-height:1.1;
+    }
+
+    .main-menu-title{
+      width:100%;
+      text-align:center;
+      font-size:30px;
+      font-weight:900;
+      color:#0f172a;
+      margin:6px 0 14px;
+      text-shadow:0 2px 0 rgba(255,255,255,.6);
+    }
+
+    .menu-grid{
+      width:100%;
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:14px;
+      margin-top:6px;
+    }
+
+    .menu-card{
+      border-radius:18px;
+      text-decoration:none;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+      padding:18px 12px;
+      box-shadow:0 16px 30px rgba(15,23,42,.12);
+      border:1px solid rgba(148,163,184,.25);
+      transition: transform .12s ease, box-shadow .12s ease;
+      min-height: 150px;
+    }
+    .menu-card:hover{
+      transform: translateY(-2px);
+      box-shadow:0 22px 36px rgba(15,23,42,.16);
+    }
+
+    .menu-card img{
+      width:72px;
+      height:72px;
+      object-fit:contain;
+      filter: drop-shadow(0 10px 14px rgba(15,23,42,.14));
+    }
+
+    .menu-card-title{
+      font-size:16px;
+      font-weight:900;
+      color:#0f172a;
+      text-align:center;
+      line-height:1.1;
+    }
+
+    /* цвета карточек (оставил твои классы, но сделал мягче) */
+    .menu-card-yellow{ background: linear-gradient(180deg, #fef3c7, #fde68a); }
+    .menu-card-red{    background: linear-gradient(180deg, #fee2e2, #fecaca); }
+    .menu-card-dark{   background: linear-gradient(180deg, #e2e8f0, #cbd5e1); }
+    .menu-card-blue{   background: linear-gradient(180deg, #dbeafe, #bfdbfe); }
+
+    @media (max-width: 380px){
+      .top-icons{ gap:10px; }
+      .menu-card{ min-height: 140px; }
+      .main-menu-title{ font-size:28px; }
+    }
+  </style>
+</head>
+
+<body>
+<div class="phone">
+  <div class="phone__top"></div>
+
+  <div class="screen">
+
+    <div class="top-icons">
+      <a href="/teacher/profile/" class="top-icon">
+        <img src="{% static 'img/profile.png' %}" alt="{% trans 'Profile' %}">
+        <div class="icon-label">{% trans "Profile" %}</div>
+      </a>
+
+      <a href="/teacher/groups/" class="top-icon">
+        <img src="{% static 'img/group.png' %}" alt="{% trans 'Groups' %}">
+        <div class="icon-label">{% trans "Groups" %}</div>
+      </a>
+
+      <a href="/settings/" class="top-icon">
+        <img src="{% static 'img/settings.png' %}" alt="{% trans 'Settings' %}">
+        <div class="icon-label">{% trans "Settings" %}</div>
+      </a>
+    </div>
+
+    <h1 class="main-menu-title">{% trans "Main menu" %}</h1>
+
+    <div class="menu-grid">
+      <a href="/teacher/students/" class="menu-card menu-card-yellow">
+        <img src="{% static 'img/students.png' %}" alt="{% trans 'Students' %}">
+        <div class="menu-card-title">{% trans "Students" %}</div>
+      </a>
+
+      <a href="/teacher/tests/create/" class="menu-card menu-card-red">
+        <img src="{% static 'img/test.png' %}" alt="{% trans 'Create test' %}">
+        <div class="menu-card-title">{% trans "Create test" %}</div>
+      </a>
+
+      <a href="/teacher/statistics/" class="menu-card menu-card-dark">
+        <img src="{% static 'img/statistics.png' %}" alt="{% trans 'Statistics' %}">
+        <div class="menu-card-title">{% trans "Statistics" %}</div>
+      </a>
+
+      <a href="/teacher/topics/" class="menu-card menu-card-blue">
+        <img src="{% static 'img/python.png' %}" alt="{% trans 'Topics' %}">
+        <div class="menu-card-title">{% trans "Topics" %}</div>
+      </a>
+    </div>
+
+  </div>
+
+  <div class="phone__bottom"></div>
+</div>
+</body>
+</html>

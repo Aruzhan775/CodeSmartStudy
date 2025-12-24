@@ -1,0 +1,234 @@
+{% load static i18n %}
+<!DOCTYPE html>
+<html lang="{{ LANGUAGE_CODE }}">
+<head>
+  <meta charset="UTF-8">
+  <title>{% trans "Student" %} – {% trans "Main menu" %}</title>
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+  <style>
+    /* ======= Student menu (modern, same vibe as other screens) ======= */
+
+    .screen.student-menu-screen{
+      padding: 18px 16px;
+      align-items: stretch;
+    }
+
+    /* Top small cards */
+    .student-top-cards{
+      width:100%;
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:14px;
+      margin-top:6px;
+      margin-bottom:14px;
+    }
+
+    .student-top-card{
+      background: rgba(255,255,255,.72);
+      border-radius:18px;
+      padding:14px 12px;
+      text-decoration:none;
+      display:flex;
+      align-items:center;
+      gap:10px;
+      box-shadow:0 12px 24px rgba(148,163,184,.45);
+      border:1px solid rgba(148,163,184,.30);
+      transition: transform .12s ease, box-shadow .12s ease, filter .12s ease;
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+    }
+    .student-top-card:hover{
+      transform: translateY(-2px);
+      box-shadow:0 18px 30px rgba(148,163,184,.60);
+      filter: brightness(0.99);
+    }
+
+    .student-top-card img{
+      width:44px;
+      height:44px;
+      object-fit:contain;
+      border-radius:14px;
+      background:#eef4ff;
+      padding:8px;
+      flex:0 0 auto;
+    }
+
+    .student-top-card span{
+      font-size:15px;
+      font-weight:800;
+      color:#0f172a;
+      line-height:1.1;
+    }
+
+    /* Title */
+    .student-menu-title{
+      width:100%;
+      text-align:center;
+      font-size:28px;
+      font-weight:900;
+      color:#0f172a;
+      margin:8px 0 14px;
+      letter-spacing:.2px;
+    }
+
+    /* Big action cards */
+    .menu-actions{
+      width:100%;
+      display:flex;
+      flex-direction:column;
+      gap:14px;
+      margin-top:2px;
+    }
+
+    .menu-action{
+      width:100%;
+      text-decoration:none;
+      background: rgba(255,255,255,.80);
+      border-radius:18px;
+      padding:16px 14px;
+      display:flex;
+      align-items:center;
+      gap:14px;
+      box-shadow:0 12px 24px rgba(148,163,184,.55);
+      border:1px solid rgba(148,163,184,.35);
+      transition: transform .12s ease, box-shadow .12s ease, filter .12s ease;
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      overflow:hidden;
+      position:relative;
+    }
+    .menu-action:hover{
+      transform: translateY(-2px);
+      box-shadow:0 18px 30px rgba(148,163,184,.70);
+      filter: brightness(0.99);
+    }
+
+    /* left icon block */
+    .menu-action__icon{
+      width:56px;
+      height:56px;
+      border-radius:16px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      flex:0 0 auto;
+      box-shadow: 0 10px 18px rgba(15,23,42,.12);
+    }
+    .menu-action__icon img{
+      width:34px;
+      height:34px;
+      object-fit:contain;
+      filter: drop-shadow(0 10px 14px rgba(15,23,42,.15));
+    }
+
+    /* text */
+    .menu-action__text{
+      display:flex;
+      flex-direction:column;
+      gap:4px;
+      min-width:0;
+    }
+    .menu-action__title{
+      font-size:18px;
+      font-weight:900;
+      color:#0f172a;
+      line-height:1.1;
+    }
+    .menu-action__sub{
+      font-size:13px;
+      color:#64748b;
+      line-height:1.25;
+    }
+
+    /* arrow */
+    .menu-action__arrow{
+      margin-left:auto;
+      font-size:20px;
+      font-weight:900;
+      color:#94a3b8;
+      flex:0 0 auto;
+    }
+
+    /* accents per card */
+    .menu-action--tests .menu-action__icon{
+      background: linear-gradient(180deg, #38bdf8, #2563eb);
+    }
+    .menu-action--groups .menu-action__icon{
+      background: linear-gradient(180deg, #a5b4fc, #6366f1);
+    }
+
+    /* subtle top highlight strip */
+    .menu-action:before{
+      content:"";
+      position:absolute;
+      top:0; left:0; right:0;
+      height:3px;
+      opacity:.85;
+      background: rgba(37,99,235,.35);
+    }
+    .menu-action--groups:before{ background: rgba(99,102,241,.35); }
+
+    @media (max-width: 360px){
+      .student-menu-title{ font-size:26px; }
+      .menu-action__title{ font-size:17px; }
+    }
+  </style>
+</head>
+
+<body>
+<div class="phone">
+  <div class="phone__top"></div>
+
+  <div class="screen student-menu-screen">
+
+    <div class="student-top-cards">
+      <a href="{% url 'student_profile' %}" class="student-top-card">
+        <img src="{% static 'img/profile.png' %}" alt="{% trans 'Profile' %}">
+        <span>{% trans "Profile" %}</span>
+      </a>
+
+      <a href="{% url 'settings' %}" class="student-top-card">
+        <img src="{% static 'img/settings.png' %}" alt="{% trans 'Settings' %}">
+        <span>{% trans "Settings" %}</span>
+      </a>
+    </div>
+
+    <div class="student-menu-title">{% trans "Main menu" %}</div>
+
+    <div class="menu-actions">
+
+      <a href="{% url 'student_tests' %}" class="menu-action menu-action--tests">
+        <div class="menu-action__icon">
+          <img src="{% static 'img/student_tests.png' %}" alt="{% trans 'Tests' %}">
+        </div>
+
+        <div class="menu-action__text">
+          <div class="menu-action__title">{% trans "Tests" %}</div>
+          <div class="menu-action__sub">{% trans "View and take tests" %}</div>
+        </div>
+
+        <div class="menu-action__arrow">›</div>
+      </a>
+
+      <a href="{% url 'student_my_group' %}" class="menu-action menu-action--groups">
+        <div class="menu-action__icon">
+          <img src="{% static 'img/group.png' %}" alt="{% trans 'My group' %}">
+        </div>
+
+        <div class="menu-action__text">
+          <div class="menu-action__title">{% trans "My group" %}</div>
+          <div class="menu-action__sub">{% trans "See your classmates and assigned tests" %}</div>
+        </div>
+
+        <div class="menu-action__arrow">›</div>
+      </a>
+
+    </div>
+
+  </div>
+
+  <div class="phone__bottom"></div>
+</div>
+</body>
+</html>

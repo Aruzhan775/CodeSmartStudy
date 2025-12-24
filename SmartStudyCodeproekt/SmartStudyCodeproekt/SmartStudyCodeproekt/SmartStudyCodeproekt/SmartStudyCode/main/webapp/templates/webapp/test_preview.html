@@ -1,0 +1,334 @@
+{% load static i18n %}
+<!DOCTYPE html>
+<html lang="{{ LANGUAGE_CODE }}">
+<head>
+  <meta charset="UTF-8">
+  <title>{% blocktrans with title=test.title %}Preview – {{ title }}{% endblocktrans %}</title>
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+  <style>
+    .screen{
+      padding-left:16px !important;
+      padding-right:16px !important;
+      box-sizing:border-box !important;
+    }
+
+    .preview-wrap{
+      width:100%;
+      max-width:392px;
+      margin:0 auto;
+      display:flex;
+      flex-direction:column;
+      gap:14px;
+    }
+
+    .preview-header{
+      width:100%;
+      background:#ffffff;
+      border:1px solid rgba(148,163,184,.35);
+      box-shadow:0 12px 24px rgba(148,163,184,.45);
+      border-radius:20px;
+      padding:16px 14px;
+      text-align:center;
+    }
+
+    .preview-title{
+      font-size:22px;
+      font-weight:900;
+      color:#0f172a;
+      margin:2px 0 6px;
+    }
+    .preview-sub{
+      color:#475569;
+      font-weight:700;
+      font-size:13px;
+      margin:0;
+    }
+
+    .test-info{
+      width:100%;
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      justify-content:center;
+      margin-top:10px;
+    }
+
+    .chip{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding:6px 10px;
+      border-radius:999px;
+      font-weight:900;
+      font-size:12px;
+      background:#eef4ff;
+      border:1px solid rgba(37,99,235,.20);
+      color:#1e3a8a;
+    }
+
+    .chip--count{
+      background:#dcfce7;
+      border:1px solid rgba(22,163,74,.18);
+      color:#14532d;
+    }
+
+    .tests-list{
+      width:100% !important;
+      margin:0 !important;
+    }
+
+    .q-card{
+      width:100%;
+      background:#ffffff;
+      border:1px solid rgba(148,163,184,.35);
+      box-shadow:0 12px 24px rgba(148,163,184,.40);
+      border-radius:20px;
+      padding:14px 14px 12px;
+      overflow:hidden;
+    }
+
+    .q-top{
+      display:flex;
+      gap:10px;
+      align-items:flex-start;
+    }
+
+    .q-num{
+      flex:0 0 auto;
+      width:34px;
+      height:34px;
+      border-radius:12px;
+      background:#dbeafe;
+      color:#1e3a8a;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-weight:900;
+      border:1px solid rgba(30,58,138,.15);
+    }
+
+    .q-text{
+      flex:1;
+      font-weight:900;
+      font-size:15px;
+      line-height:1.25;
+      color:#0f172a;
+      word-break:break-word;
+      margin-top:2px;
+    }
+
+    .answers{
+      margin-top:10px;
+      display:flex;
+      flex-direction:column;
+      gap:8px;
+    }
+
+    .ans-row{
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:10px;
+      background:#f1f5f9;
+      border:1px solid rgba(148,163,184,.25);
+      border-radius:14px;
+      padding:10px 10px;
+    }
+
+    .ans-text{
+      color:#0f172a;
+      font-weight:700;
+      font-size:13px;
+      line-height:1.25;
+      word-break:break-word;
+      flex:1;
+      min-width:0;
+    }
+
+    .ans-badge{
+      flex:0 0 auto;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding:4px 10px;
+      border-radius:999px;
+      font-size:11px;
+      font-weight:900;
+      border:1px solid transparent;
+      white-space:nowrap;
+    }
+    .ans-badge--ok{
+      background:#dcfce7;
+      color:#14532d;
+      border-color: rgba(22,163,74,.18);
+    }
+    .ans-badge--no{
+      background:#fee2e2;
+      color:#991b1b;
+      border-color: rgba(153,27,27,.18);
+    }
+
+    .q-actions{
+      margin-top:12px;
+      display:flex;
+      gap:10px;
+    }
+
+    .pill-btn{
+      flex:1;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:12px 12px;
+      border-radius:999px;
+      font-weight:900;
+      font-size:14px;
+      text-decoration:none;
+      box-shadow:0 10px 22px rgba(15,23,42,.10);
+      border:1px solid rgba(148,163,184,.30);
+      background:#ffffff;
+      color:#0f172a;
+      transition:transform .12s ease, filter .12s ease;
+    }
+    .pill-btn:active{ transform: translateY(1px); }
+
+    .pill-btn--danger{
+      background:#ef4444;
+      color:#fff;
+      border-color: rgba(239,68,68,.35);
+    }
+
+    .add-btn{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+      width:100%;
+      padding:14px 16px;
+      border-radius:999px;
+      text-decoration:none;
+      font-weight:900;
+      background:#2563eb;
+      color:#fff;
+      box-shadow:0 14px 28px rgba(15,23,42,.18);
+      margin-top:6px;
+    }
+
+    .bottom-actions{
+      width:100%;
+      display:flex;
+      flex-direction:column;
+      gap:12px;
+      margin-top:6px;
+    }
+
+    .btn-wide{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      width:100%;
+      padding:16px 18px;
+      font-size:16px;
+      font-weight:900;
+      border-radius:999px;
+      text-align:center;
+      line-height:1.2;
+      border:0;
+      cursor:pointer;
+      box-shadow:0 14px 28px rgba(15,23,42,.18);
+    }
+    .btn-wide--dark{ background:#374151; color:#fff; }
+    .btn-wide--red{ background:#ef4444; color:#fff; }
+
+    .empty-card{
+      width:100%;
+      background:rgba(255,255,255,.8);
+      border:1px solid rgba(148,163,184,.25);
+      border-radius:18px;
+      padding:14px;
+      text-align:center;
+      color:#475569;
+      font-weight:700;
+    }
+  </style>
+</head>
+
+<body>
+<div class="phone">
+  <div class="phone__top"></div>
+
+  <div class="screen">
+    <div class="preview-wrap">
+
+      <div class="preview-header">
+        <div class="preview-title">{% trans "Test preview" %}</div>
+        <p class="preview-sub">{% trans "Review questions before publishing" %}</p>
+
+        <div class="test-info">
+          <span class="chip">
+            {% blocktrans with title=test.title %}Test: {{ title }}{% endblocktrans %}
+          </span>
+          <span class="chip chip--count">
+            {% blocktrans count qcount=questions|length %}Questions: {{ qcount }}{% plural %}Questions: {{ qcount }}{% endblocktrans %}
+          </span>
+        </div>
+      </div>
+
+      <div class="tests-list">
+        {% for q in questions %}
+          <div class="q-card">
+
+            <div class="q-top">
+              <div class="q-num">{{ forloop.counter }}</div>
+              <div class="q-text">{{ q.question_text }}</div>
+            </div>
+
+        <div class="answers">
+  {% for ans in q.answers.all %}
+    <div class="ans-row">
+      <div class="ans-text">• {{ ans.answer_text }}</div>
+
+      {% if ans.is_correct %}
+        <div class="ans-badge ans-badge--ok">{% trans "Correct" %} ✓</div>
+      {% endif %}
+    </div>
+  {% empty %}
+    <div class="empty-card">{% trans "No answers yet" %}</div>
+  {% endfor %}
+</div>
+
+            <div class="q-actions">
+              <a href="{% url 'edit_question' q.id %}" class="pill-btn">{% trans "Edit" %}</a>
+              <a href="{% url 'delete_question' q.id %}" class="pill-btn pill-btn--danger">{% trans "Delete" %}</a>
+            </div>
+
+          </div>
+        {% empty %}
+          <div class="empty-card">{% trans "No questions yet." %}</div>
+        {% endfor %}
+      </div>
+
+      <a href="{% url 'add_questions' test.id %}" class="add-btn">
+        ➕ {% trans "Add another question" %}
+      </a>
+
+      <form method="post" class="bottom-actions">
+        {% csrf_token %}
+
+        <button type="submit" name="action" value="main" class="btn-wide btn-wide--dark">
+          {% trans "Publish & go to main menu" %}
+        </button>
+
+        <button type="submit" name="action" value="my_tests" class="btn-wide btn-wide--red">
+          {% trans "View my tests" %}
+        </button>
+      </form>
+
+    </div>
+  </div>
+
+  <div class="phone__bottom"></div>
+</div>
+</body>
+</html>

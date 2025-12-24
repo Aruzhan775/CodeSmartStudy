@@ -1,0 +1,78 @@
+{% load static i18n %}
+<!DOCTYPE html>
+<html lang="{{ LANGUAGE_CODE }}">
+<head>
+    <meta charset="UTF-8">
+    <title>{% trans "Edit question" %}</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+
+<div class="phone">
+    <div class="phone__top"></div>
+
+    <div class="screen">
+
+        <h1 class="form-title">{% trans "Edit question" %}</h1>
+        <p class="small-text center">
+            {% trans "You can change the text of the question and answers." %}
+        </p>
+        <p class="small-text center">
+            {% trans "Test" %}: <b>{{ question.test.title }}</b>
+        </p>
+
+        <form method="post" class="form-wrapper" style="margin-top:16px;">
+            {% csrf_token %}
+
+            <div class="form-group">
+                <label class="form-label">{% trans "Question text" %}</label>
+                <textarea name="question_text"
+                          class="form-input"
+                          rows="4"
+                          required>{{ question.question_text }}</textarea>
+            </div>
+
+            <div class="tests-header" style="margin-top:14px;">{% trans "Answers" %}</div>
+
+            {% for ans in answers %}
+                <div class="test-item" style="margin-top:10px;">
+                    <div class="form-group" style="margin-bottom:10px;">
+                        <label class="form-label">{% trans "Answer" %} {{ forloop.counter }}</label>
+                        <input type="text"
+                               name="answer_text_{{ forloop.counter0 }}"
+                               class="form-input"
+                               value="{{ ans.answer_text }}"
+                               required>
+                    </div>
+
+                    <label style="display:flex; align-items:center; gap:10px;">
+                        <input type="radio"
+                               name="correct_index"
+                               value="{{ forloop.counter0 }}"
+                               {% if ans.is_correct %}checked{% endif %}
+                               required>
+                        <span class="small-text">{% trans "Correct answer" %}</span>
+                    </label>
+                </div>
+            {% empty %}
+                <p class="small-text center">{% trans "No answers to edit." %}</p>
+            {% endfor %}
+
+            <button type="submit" class="btn-primary" style="margin-top:16px;">
+                {% trans "Save" %}
+            </button>
+
+            <a href="{% url 'test_preview' question.test_id %}"
+               class="secondary-button"
+               style="margin-top:10px;">
+                {% trans "Cancel" %}
+            </a>
+        </form>
+
+    </div>
+
+    <div class="phone__bottom"></div>
+</div>
+
+</body>
+</html>

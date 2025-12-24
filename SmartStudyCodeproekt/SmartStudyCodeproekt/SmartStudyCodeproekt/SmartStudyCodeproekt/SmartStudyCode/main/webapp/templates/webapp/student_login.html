@@ -1,0 +1,62 @@
+{% load static i18n %}
+<!DOCTYPE html>
+<html lang="{{ LANGUAGE_CODE }}">
+<head>
+    <meta charset="UTF-8">
+    <title>{% trans "Student" %} – {% trans "Login" %}</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+
+<div class="phone">
+    <div class="phone__top"></div>
+
+    <div class="screen">
+
+        <h1 class="form-title">{% trans "Login" %} ({% trans "Student" %})</h1>
+
+        <!-- ОТПРАВЛЯЕМ POST НА view student_login -->
+        <form class="form-wrapper" method="post" action="{% url 'student_login' %}">
+            {% csrf_token %}
+
+            <div class="form-group">
+                <label class="form-label">{% trans "Email" %}*</label>
+                <input type="email"
+                       class="form-input"
+                       name="email"
+                       placeholder="{% trans 'email' %}"
+                       autocomplete="email"
+                       required>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">{% trans "Password" %}</label>
+                <input type="password"
+                       class="form-input"
+                       name="password"
+                       placeholder="{% trans 'password' %}"
+                       required>
+            </div>
+
+            <button type="submit" class="btn-primary">{% trans "Login" %}</button>
+        </form>
+
+        <!-- выводим возможные ошибки -->
+        {% if messages %}
+            <ul class="auth-errors">
+                {% for message in messages %}
+                    <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+
+        <p class="auth-bottom-text">{% trans "Don't have an account?" %}</p>
+        <a href="/student/register/" class="btn-link">{% trans "Register" %}</a>
+
+    </div>
+
+    <div class="phone__bottom"></div>
+</div>
+
+</body>
+</html>

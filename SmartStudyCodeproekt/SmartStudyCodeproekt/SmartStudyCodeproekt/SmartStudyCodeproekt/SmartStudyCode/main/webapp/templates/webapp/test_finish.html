@@ -1,0 +1,169 @@
+{% load static i18n %}
+<!DOCTYPE html>
+<html lang="{{ LANGUAGE_CODE }}">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>{% trans "Test Result" %}</title>
+
+  <!-- важно: подключаем общий стиль проекта -->
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+  <style>
+    .screen{
+      padding-left:16px !important;
+      padding-right:16px !important;
+      box-sizing:border-box !important;
+    }
+
+    .result-wrap{
+      width:100%;
+      max-width:392px;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      gap:14px;
+      margin-top:6px;
+    }
+
+    .badge{
+      width:100%;
+      text-align:center;
+      padding:14px 16px;
+      border-radius:18px;
+      font-weight:900;
+      box-shadow:0 12px 24px rgba(148,163,184,.45);
+      border:1px solid rgba(148,163,184,.25);
+    }
+
+    .badge-completed{
+      background:#dcfce7;
+      color:#14532d;
+    }
+
+    .badge-level{
+      background:#dbeafe;
+      color:#1e3a8a;
+    }
+
+    .ring-wrap{
+      margin-top:6px;
+      width: 240px;
+      height: 240px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      position:relative;
+    }
+
+    .ring{
+      width:240px;
+      height:240px;
+      transform: rotate(-90deg);
+    }
+
+    .ring circle{
+      fill:none;
+      stroke-width:18;
+      stroke-linecap:round;
+    }
+
+    .ring .bg{ stroke:#d7e6ff; }
+
+    .ring .fg{
+      stroke:#22c55e;
+      stroke-dasharray: 100 100;
+      stroke-dashoffset: 100;
+      transition: stroke-dashoffset .6s ease;
+    }
+
+    .ring-center{
+      position:absolute;
+      width: 170px;
+      height: 170px;
+      border-radius:50%;
+      background:#e5edf9;   /* фон как у твоего screen */
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-weight:900;
+      font-size:44px;
+      color:#0f172a;
+      box-shadow:0 10px 22px rgba(15,23,42,.10);
+      border:1px solid rgba(148,163,184,.25);
+    }
+
+    .btn-main{
+      width:100%;
+      margin-top:8px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:14px 0;
+      border-radius:999px;
+      background:#2563eb;
+      color:#fff;
+      text-decoration:none;
+      font-weight:900;
+      box-shadow:0 14px 28px rgba(15,23,42,.18);
+    }
+    .btn-main:active{ transform: translateY(1px); }
+  </style>
+</head>
+
+<body>
+  <div class="phone">
+    <div class="phone__top"></div>
+
+    <div class="screen">
+      <div class="result-wrap">
+
+        <div class="badge badge-completed">
+          {% trans "Test completed!" %}
+        </div>
+
+        <div class="badge badge-level">
+          {{ level_text|default:_("Beginner level") }}
+        </div>
+
+        <div class="ring-wrap" data-percent="{{ percent|default:0 }}">
+          <svg class="ring" viewBox="0 0 120 120" aria-hidden="true">
+            <circle class="bg" cx="60" cy="60" r="48"></circle>
+            <circle class="fg" cx="60" cy="60" r="48"></circle>
+          </svg>
+          <div class="ring-center" id="percentText">{{ percent|default:0 }}%</div>
+        </div>
+
+        <a class="btn-main" href="{% url 'student_menu' %}">
+          {% trans "Go to main menu" %}
+        </a>
+
+      </div>
+    </div>
+
+    <div class="phone__bottom"></div>
+  </div>
+
+<script>
+(function(){
+  const wrap = document.querySelector('.ring-wrap');
+  if(!wrap) return;
+
+  let p = parseInt(wrap.dataset.percent || "0", 10);
+  if (Number.isNaN(p)) p = 0;
+  p = Math.max(0, Math.min(100, p));
+
+  const circle = document.querySelector('.ring .fg');
+  const r = 48;
+  const C = 2 * Math.PI * r;
+
+  circle.style.strokeDasharray = C + " " + C;
+  circle.style.strokeDashoffset = (C * (1 - p/100));
+
+  const text = document.getElementById('percentText');
+  if (text) text.textContent = p + "%";
+})();
+</script>
+
+</body>
+</html>

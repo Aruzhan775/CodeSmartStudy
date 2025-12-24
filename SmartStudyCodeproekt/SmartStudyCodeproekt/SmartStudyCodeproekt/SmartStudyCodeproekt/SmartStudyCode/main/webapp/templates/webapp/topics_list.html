@@ -1,0 +1,72 @@
+{% load i18n %}
+<!DOCTYPE html>
+<html lang="{{ LANGUAGE_CODE }}">
+<head>
+    <meta charset="UTF-8">
+    <title>{% trans "Topics" %}</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <style>
+      .phone .screen .profile-header{
+        font-size:22px !important;
+        font-weight:900 !important;
+        padding:18px 16px !important;
+        border-radius:18px !important;
+        text-align:center !important;
+      }
+    </style>
+</head>
+<body>
+
+<div class="phone">
+    <div class="phone__top"></div>
+    <div class="screen">
+
+        <div class="profile-header">{% trans "Topics" %}</div>
+
+        <h2 class="main-menu-title" style="margin-bottom:8px;">{% trans "All topics" %}</h2>
+
+        <div class="tests-list">
+            {% for t in topics %}
+                <div class="test-item">
+                    <div class="test-name">{{ t.name }}</div>
+
+                    <div class="test-meta">
+                        <span>
+                          {% trans "Difficulty" %}:
+                          {{ t.difficulty|default:"-" }}
+                        </span>
+                    </div>
+
+                    <div style="display:flex; gap:8px; margin-top:8px;">
+                        <a href="{% url 'topic_edit' t.id %}"
+                           class="secondary-button"
+                           style="flex:1; text-align:center; background:#06c167;">
+                            {% trans "Edit" %}
+                        </a>
+
+                        <a href="{% url 'topic_delete' t.id %}"
+                           class="secondary-button"
+                           style="flex:1; text-align:center; background:#ef4444;">
+                            {% trans "Delete" %}
+                        </a>
+                    </div>
+                </div>
+            {% empty %}
+                <p class="small-text center">{% trans "No topics yet." %}</p>
+            {% endfor %}
+        </div>
+
+        <a href="{% url 'topic_create' %}" class="btn-primary" style="margin-top:16px;">
+            {% trans "Create topic" %}
+        </a>
+
+        <a href="{% url 'teacher_menu' %}" class="groups-btn-home">
+            {% trans "Main menu" %}
+        </a>
+
+    </div>
+    <div class="phone__bottom"></div>
+</div>
+
+</body>
+</html>

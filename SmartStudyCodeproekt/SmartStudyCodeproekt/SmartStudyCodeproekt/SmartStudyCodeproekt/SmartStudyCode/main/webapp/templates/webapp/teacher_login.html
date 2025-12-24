@@ -1,0 +1,132 @@
+{% load static i18n %}
+<!DOCTYPE html>
+<html lang="{{ LANGUAGE_CODE }}">
+<head>
+  <meta charset="UTF-8">
+  <title>{% trans "Teacher" %} – {% trans "Login" %}</title>
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+  <style>
+    .screen{
+      padding-left:16px !important;
+      padding-right:16px !important;
+      box-sizing:border-box !important;
+    }
+
+    .auth-header{
+      width:100%;
+      background:#2563eb;
+      color:#fff;
+      text-align:center;
+      padding:18px 16px;
+      border-radius:18px;
+      font-size:22px;
+      font-weight:900;
+      margin:10px 0 14px;
+      box-shadow:0 12px 24px rgba(37,99,235,.25);
+    }
+
+    .auth-card{
+      width:100%;
+      background: rgba(255,255,255,.75);
+      border-radius:18px;
+      padding:16px;
+      box-shadow:0 12px 24px rgba(148,163,184,.45);
+      border:1px solid rgba(148,163,184,.35);
+    }
+
+    .auth-subtitle{
+      text-align:center;
+      color:#475569;
+      font-weight:700;
+      margin:2px 0 14px;
+      font-size:13px;
+    }
+
+    .auth-errors{
+      width:100%;
+      background:#fee2e2;
+      border:1px solid rgba(239,68,68,.25);
+      color:#991b1b;
+      border-radius:14px;
+      padding:12px 12px;
+      font-weight:800;
+      margin:0 0 12px 0;
+      box-shadow:0 10px 20px rgba(15,23,42,.08);
+      text-align:center;
+    }
+
+    .btn-primary{
+      border-radius:999px !important;
+      height:56px !important;
+      font-weight:900 !important;
+      font-size:18px !important;
+    }
+
+    .auth-bottom{
+      text-align:center;
+      margin-top:14px;
+    }
+    .auth-bottom-text{
+      margin:0 0 8px 0 !important;
+      font-weight:700;
+      color:#475569;
+    }
+    .btn-link{
+      font-weight:900;
+    }
+  </style>
+</head>
+
+<body>
+<div class="phone">
+  <div class="phone__top"></div>
+
+  <div class="screen">
+
+    <div class="auth-header">{% trans "Teacher login" %}</div>
+
+    <div class="auth-card">
+
+      <div class="auth-subtitle">{% trans "Enter your credentials to continue" %}</div>
+
+      {% if error %}
+        <div class="auth-errors">{{ error }}</div>
+      {% endif %}
+
+      <form class="form-wrapper" method="post" action="{% url 'teacher_login' %}">
+        {% csrf_token %}
+
+        <div class="form-group">
+          <label class="form-label">{% trans "Username" %}*</label>
+          <input type="text"
+                 class="form-input"
+                 name="username"
+                 placeholder="{% trans 'username' %}"
+                 required>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">{% trans "Password" %}*</label>
+          <input type="password"
+                 class="form-input"
+                 name="password"
+                 placeholder="{% trans 'password' %}"
+                 required>
+        </div>
+
+        <button type="submit" class="btn-primary">{% trans "Login" %}</button>
+      </form>
+
+      <div class="auth-bottom">
+        <p class="auth-bottom-text">{% trans "Don't have an account?" %}</p>
+        <a href="{% url 'teacher_register' %}" class="btn-link">{% trans "Register" %}</a>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="phone__bottom"></div>
+</div>
+</body>
+</html>

@@ -1,0 +1,78 @@
+{% load static i18n %}
+<!DOCTYPE html>
+<html lang="{{ LANGUAGE_CODE }}">
+<head>
+    <meta charset="UTF-8">
+    <title>{% trans "Create test" %}</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+
+<div class="phone">
+    <div class="phone__top"></div>
+
+    <div class="screen">
+
+        <h1 class="form-title">{% trans "Create test" %}</h1>
+
+        {% if success %}
+            <div class="success-banner">
+                {% trans "Test has been created successfully" %} ✅
+            </div>
+        {% endif %}
+
+        <form method="post" class="form-wrapper">
+            {% csrf_token %}
+
+            <div class="form-group">
+                <label class="form-label">{% trans "Test name" %}</label>
+                <input type="text" name="name" class="form-input"
+                       placeholder="{% trans 'Beginner level (Python basics)' %}" required>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">{% trans "Topic" %}</label>
+                <select name="topic" class="form-input">
+                    <option value="">{% trans "Select topic" %}</option>
+                    {% for topic in topics %}
+                        <option value="{{ topic.id }}">{{ topic.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">{% trans "Time limit (minutes)" %}</label>
+                <select class="form-input" name="time_limit">
+                    <option value="0">{% trans "No limit" %}</option>
+                    <option value="5">5 {% trans "min" %}</option>
+                    <option value="10">10 {% trans "min" %}</option>
+                    <option value="15">15 {% trans "min" %}</option>
+                    <option value="20">20 {% trans "min" %}</option>
+                    <option value="30">30 {% trans "min" %}</option>
+                    <option value="45">45 {% trans "min" %}</option>
+                    <option value="60">60 {% trans "min" %}</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">{% trans "Difficulty" %}</label>
+                <select name="difficulty" class="form-input">
+                    <option value="easy">{% trans "Beginner" %}</option>
+                    <option value="medium">{% trans "Medium" %}</option>
+                    <option value="hard">{% trans "Advanced" %}</option>
+                </select>
+            </div>
+
+            <button type="submit" class="btn-primary">{% trans "Next" %}</button>
+        </form>
+
+        <a href="{% url 'teacher_menu' %}" class="groups-btn-home">
+            {% trans "Main menu" %}
+        </a>
+    </div>
+
+    <div class="phone__bottom"></div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,104 @@
+{% load static i18n %}
+<!DOCTYPE html>
+<html lang="{{ LANGUAGE_CODE }}">
+<head>
+    <meta charset="UTF-8">
+    <title>{% trans "Login as" %} – CodeSmartStudy</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+    <style>
+        .login-title{
+            width:100%;
+            text-align:center;
+            font-size:22px;
+            font-weight:700;
+            color:#2563eb;
+            margin:10px 0 16px;
+        }
+
+        .role-card{
+            width:100%;
+            max-width: 380px;
+            background:#f8fafc;
+            border-radius:18px;
+            overflow:hidden;
+            text-decoration:none;
+            box-shadow:0 12px 24px rgba(148,163,184,.55);
+            margin-bottom:16px;
+            display:flex;
+            flex-direction:column;
+            border:1px solid rgba(148,163,184,.35);
+            transition: transform .12s ease, box-shadow .12s ease;
+        }
+        .role-card:hover{
+            transform: translateY(-2px);
+            box-shadow:0 18px 30px rgba(148,163,184,.7);
+        }
+
+        .role-card__image{
+            height:150px;
+            background: linear-gradient(180deg, #fef3c7, #fff7da);
+            display:flex;
+            align-items:center;
+            justify-content:center;
+        }
+        .role-card__image img{
+            width:110px;
+            height:110px;
+            object-fit:contain;
+            filter: drop-shadow(0 10px 14px rgba(15,23,42,.18));
+        }
+
+        .role-card__label{
+            height:64px;
+            background:#1f2937;
+            color:#fff;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            font-size:18px;
+            font-weight:700;
+            letter-spacing:.2px;
+        }
+
+        .login-wrap{
+            width:100%;
+            display:flex;
+            flex-direction:column;
+            align-items:center;
+            gap:16px;
+            margin-top:6px;
+        }
+        .role-card{ margin:0; }
+    </style>
+</head>
+<body>
+<div class="phone">
+    <div class="phone__top"></div>
+
+    <div class="screen">
+
+        <div class="login-title">{% trans "Login as" %}:</div>
+
+        <div class="login-wrap">
+            <a href="{% url 'teacher_login' %}" class="role-card">
+                <div class="role-card__image">
+                    <img src="{% static 'img/teacher.png' %}" alt="{% trans 'Teacher' %}">
+                </div>
+                <div class="role-card__label">{% trans "Teacher" %}</div>
+            </a>
+
+            <a href="{% url 'student_login' %}" class="role-card">
+                <div class="role-card__image">
+                    <img src="{% static 'img/student.png' %}" alt="{% trans 'Student' %}">
+                </div>
+                <div class="role-card__label">{% trans "Student" %}</div>
+            </a>
+        </div>
+
+    </div>
+
+    <div class="phone__bottom"></div>
+</div>
+</body>
+</html>

@@ -1,0 +1,250 @@
+{% load static i18n %}
+<!DOCTYPE html>
+<html lang="{{ LANGUAGE_CODE }}">
+<head>
+  <meta charset="UTF-8" />
+  <title>{% trans "Teacher – My tests" %}</title>
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+  <style>
+    .screen{
+      padding-left:16px !important;
+      padding-right:16px !important;
+      box-sizing:border-box !important;
+    }
+
+    .profile-header{
+      font-size:22px !important;
+      font-weight:900 !important;
+      padding:18px 16px !important;
+      border-radius:22px !important;
+      text-align:center !important;
+      margin:10px 0 14px !important;
+    }
+
+    .sub-title{
+      width:100%;
+      text-align:center;
+      font-weight:900;
+      font-size:26px;
+      margin:6px 0 14px;
+      color:#0f172a;
+    }
+
+    .tests-list-full{
+      width:100%;
+      display:flex;
+      flex-direction:column;
+      gap:12px;
+    }
+
+    .test-card-full{
+      width:100%;
+      box-sizing:border-box;
+      background: rgba(255,255,255,.78);
+      border:1px solid rgba(148,163,184,.28);
+      border-radius:18px;
+      padding:14px 14px;
+      display:flex;
+      justify-content:space-between;
+      align-items:flex-start;
+      gap:12px;
+      box-shadow:0 12px 24px rgba(148,163,184,.45);
+      transition: transform .12s ease, box-shadow .12s ease;
+    }
+    .test-card-full:hover{
+      transform: translateY(-1px);
+      box-shadow:0 18px 30px rgba(148,163,184,.6);
+    }
+
+    .test-card-info{
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+      min-width:0;
+      flex:1;
+    }
+
+    .test-card-title{
+      font-weight:900;
+      font-size:16px;
+      line-height:1.15;
+      color:#0f172a;
+      margin:0;
+      min-width:0;
+      overflow:hidden;
+
+      display:-webkit-box;
+      -webkit-box-orient:vertical;
+      -webkit-line-clamp:2;
+      line-clamp:2;
+
+      word-break: break-word;
+    }
+
+    .meta-grid{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+    }
+
+    .meta-badge{
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      padding:4px 10px;
+      border-radius:999px;
+      font-weight:900;
+      font-size:12px;
+      color:#0f172a;
+      background:#eaf2ff;
+      border:1px solid rgba(37,99,235,.18);
+      width:max-content;
+      max-width:100%;
+    }
+    .meta-badge b{
+      font-weight:900;
+    }
+
+    .meta-badge--topic{
+      background:#dbeafe;
+      border-color: rgba(30,58,138,.18);
+      color:#1e3a8a;
+    }
+    .meta-badge--diff{
+      background:#dcfce7;
+      border-color: rgba(20,83,45,.18);
+      color:#14532d;
+    }
+    .meta-badge--q{
+      background:#fee2e2;
+      border-color: rgba(153,27,27,.18);
+      color:#991b1b;
+    }
+    .meta-badge--time{
+      background:#f1f5f9;
+      border-color: rgba(100,116,139,.25);
+      color:#0f172a;
+    }
+
+    .test-card-actions{
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+      flex-shrink:0;
+      width: 160px;
+      max-width: 42%;
+    }
+
+    .btn-mini{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding:12px 12px;
+      border-radius:999px;
+      font-weight:900;
+      text-decoration:none;
+      border:none;
+      width: 210px;
+  font-size:13px;
+  /* одна строка */
+  overflow:hidden;
+  text-overflow:ellipsis;
+      cursor:pointer;
+      white-space:nowrap;
+      width:100%;
+      box-shadow:0 10px 22px rgba(15,23,42,.10);
+      transition: transform .12s ease, filter .12s ease, box-shadow .12s ease;
+    }
+
+    .btn-mini:hover{
+      transform: translateY(-1px);
+      filter: brightness(1.02);
+      box-shadow:0 14px 28px rgba(15,23,42,.14);
+    }
+
+    .btn-mini-dark{ background:#0b1220; color:#fff; }
+    .btn-mini-red{ background:#ef4444; color:#fff; }
+
+    .groups-btn-home{
+      margin-top:16px !important;
+      border-radius:18px !important;
+      padding:14px 0 !important;
+      font-weight:900 !important;
+    }
+
+    @media (max-width: 380px){
+      .test-card-full{ flex-direction:column; align-items:stretch; }
+      .test-card-actions{ width:100%; max-width:none; }
+    }
+  </style>
+</head>
+
+<body>
+<div class="phone">
+  <div class="phone__top"></div>
+  <div class="screen">
+
+    <div class="profile-header">{% trans "My tests" %}</div>
+    <div class="sub-title">{% trans "All tests" %}</div>
+
+    <div class="tests-list-full">
+      {% for t in tests %}
+        <div class="test-card-full">
+          <div class="test-card-info">
+            <div class="test-card-title">{{ t.title }}</div>
+
+            <div class="meta-grid">
+              <span class="meta-badge meta-badge--topic">
+                {% trans "Topic" %}: <b>{{ t.topic.name|default:"—" }}</b>
+              </span>
+
+              <span class="meta-badge meta-badge--diff">
+                {% trans "Difficulty" %}: <b>{{ t.difficulty }}</b>
+              </span>
+
+              <span class="meta-badge meta-badge--q">
+                {% trans "Questions" %}: <b>{{ t.questions_count }}</b>
+              </span>
+
+              <span class="meta-badge meta-badge--time">
+                {% trans "Time limit" %}:
+                <b>
+                  {% if t.time_limit %}
+                    {{ t.time_limit }}
+                  {% else %}
+                    {% trans "No limit" %}
+                  {% endif %}
+                </b>
+              </span>
+            </div>
+          </div>
+
+          <div class="test-card-actions">
+            <a class="btn-mini btn-mini-dark" href="{% url 'schedule_test' t.id %}">
+              {% trans "Schedule / Reschedule" %}
+            </a>
+
+            <form method="post" action="{% url 'teacher_tests' %}" style="margin:0;">
+              {% csrf_token %}
+              <input type="hidden" name="test_id" value="{{ t.id }}">
+              <button class="btn-mini btn-mini-red" type="submit" name="action" value="delete">
+                {% trans "Delete" %}
+              </button>
+            </form>
+          </div>
+        </div>
+      {% empty %}
+        <p class="small-text center">{% trans "No tests available." %}</p>
+      {% endfor %}
+    </div>
+
+    <a href="{% url 'teacher_menu' %}" class="groups-btn-home">
+      {% trans "Main menu" %}
+    </a>
+
+  </div>
+  <div class="phone__bottom"></div>
+</div>
+</body>
+</html>

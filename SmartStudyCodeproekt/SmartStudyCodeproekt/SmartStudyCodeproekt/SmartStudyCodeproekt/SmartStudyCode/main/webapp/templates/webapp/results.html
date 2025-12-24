@@ -1,0 +1,23 @@
+<!doctype html>
+<html>
+<head><meta charset="utf-8"><title>Результат</title><link rel="stylesheet" href="/static/webapp/css/styles.css"></head>
+<body>
+  <header><a href="{% url 'index' %}">← На главную</a></header>
+  <main>
+    {% if result %}
+      <h2>Результат</h2>
+      <p>Баллы: {{ result.score }} / {{ result.total }}</p>
+      <p>Точность: {{ result.accuracy|floatformat:2 }}</p>
+    {% else %}
+      <h2>История результатов</h2>
+      <ul>
+        {% for r in recent %}
+          <li>{{ r.timestamp|date:"Y-m-d H:i" }} — {{ r.score }}/{{ r.total }} — {{ r.accuracy|floatformat:2 }}</li>
+        {% empty %}
+          <li>Нет результатов</li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+  </main>
+</body>
+</html>

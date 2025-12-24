@@ -1,0 +1,81 @@
+{% load static i18n %}
+<!DOCTYPE html>
+<html lang="{{ LANGUAGE_CODE }}">
+<head>
+    <meta charset="UTF-8">
+    <title>{% blocktrans %}Schedule test – {{ test.title }}{% endblocktrans %}</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+    <style>
+        /* маленькая косметика, чтобы было как в остальных экранах */
+        .screen{
+            padding: 18px;
+        }
+        .form-title{
+            margin-top: 6px;
+        }
+        .small-text.center{
+            margin: 6px 0 14px;
+        }
+        .secondary-button.big-back{
+            margin-top:20px;
+            display:block;
+            width:100%;
+            padding:16px 18px;
+            font-size:18px;
+            border-radius:999px;
+            text-align:center;
+        }
+        select.form-input option[disabled]{
+            color:#94a3b8;
+        }
+    </style>
+</head>
+<body>
+
+<div class="phone">
+    <div class="phone__top"></div>
+
+    <div class="screen">
+
+        <h1 class="form-title">{% trans "Schedule test" %}</h1>
+
+        <p class="small-text center">
+            <b>{{ test.title }}</b>
+            {% if test.topic %}
+                • {{ test.topic.name }}
+            {% endif %}
+        </p>
+
+        <form method="post" class="form-wrapper">
+            {% csrf_token %}
+
+            <div class="form-group">
+                <label class="form-label">{% trans "Group" %}</label>
+                <select name="group_id" class="form-input" required>
+                    <option value="" disabled selected>{% trans "Choose group" %}</option>
+                    {% for g in groups %}
+                        <option value="{{ g.id }}">{{ g.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">{% trans "Date & time" %}</label>
+                <input type="datetime-local" name="scheduled_at" class="form-input" required>
+            </div>
+
+            <button type="submit" class="btn-primary">{% trans "Schedule" %}</button>
+        </form>
+
+        <a href="{% url 'teacher_tests' %}" class="secondary-button big-back">
+            {% trans "Back to my tests" %}
+        </a>
+
+    </div>
+
+    <div class="phone__bottom"></div>
+</div>
+
+</body>
+</html>

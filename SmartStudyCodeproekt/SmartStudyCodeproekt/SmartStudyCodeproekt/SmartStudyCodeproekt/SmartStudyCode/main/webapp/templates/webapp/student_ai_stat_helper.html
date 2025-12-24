@@ -1,0 +1,198 @@
+{% load static i18n %}
+<!DOCTYPE html>
+<html lang="{{ LANGUAGE_CODE }}">
+<head>
+  <meta charset="UTF-8">
+  <title>{% trans "AIStatHelper" %}</title>
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <style>
+    /* НЕ трогаем body — фон сайта остаётся как был */
+
+    .screen{
+      padding:16px !important;
+      box-sizing:border-box !important;
+
+      /* “чистый” светлый фон, но с лёгким космическим оттенком */
+      background:
+        radial-gradient(900px 520px at 15% 0%, rgba(124,58,237,.16) 0%, rgba(124,58,237,0) 55%),
+        radial-gradient(900px 520px at 90% 15%, rgba(6,182,212,.12) 0%, rgba(6,182,212,0) 55%),
+        linear-gradient(180deg, #f8fafc 0%, #eef2ff 100%);
+    }
+
+    .page-title{
+      font-size:22px;
+      font-weight:900;
+      text-align:center;
+      margin:6px 0 12px;
+
+      /* градиентный текст */
+      background: linear-gradient(90deg, #7c3aed 0%, #06b6d4 45%, #f43f5e 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .card{
+      width:100%;
+      background:#fff;
+      border-radius:18px;
+      padding:16px;
+      box-shadow:0 10px 22px rgba(15,23,42,.10);
+      margin:10px 0;
+      box-sizing:border-box;
+    }
+
+    /* Верхняя карточка сделаем “космической”, но светлой */
+    .card.meta{
+      background:
+        radial-gradient(120% 120% at 10% 0%, rgba(124,58,237,.14) 0%, rgba(124,58,237,0) 60%),
+        radial-gradient(120% 120% at 90% 10%, rgba(6,182,212,.12) 0%, rgba(6,182,212,0) 60%),
+        #ffffff;
+      border:1px solid rgba(15,23,42,.08);
+    }
+
+    .meta p{ margin:6px 0; font-weight:800; color:#0f172a; }
+
+    .btn-row{ display:flex; gap:10px; flex-wrap:wrap; margin-top:10px; }
+
+    .btn-mini{
+      flex:1;
+      text-align:center;
+      padding:12px 10px;
+      border-radius:14px;
+      font-weight:900;
+      text-decoration:none;
+      border:0;
+      cursor:pointer;
+      background:#0b1220;
+      color:#fff;
+    }
+
+    /* КОСМИЧЕСКАЯ кнопка (Analyze + можно и Main menu при желании) */
+    .btn-mini.cosmic{
+      border:1px solid rgba(255,255,255,.18);
+      background:
+        radial-gradient(120% 120% at 10% 0%, rgba(124,58,237,.95) 0%, rgba(124,58,237,0) 55%),
+        radial-gradient(120% 120% at 90% 10%, rgba(6,182,212,.85) 0%, rgba(6,182,212,0) 55%),
+        linear-gradient(135deg, #0b1026 0%, #2b0b5a 45%, #0b5a67 100%);
+      box-shadow:
+        0 12px 26px rgba(0,0,0,.18),
+        inset 0 1px 0 rgba(255,255,255,.15);
+      transition: transform .15s ease, filter .15s ease;
+    }
+    .btn-mini.cosmic:hover{ transform: translateY(-1px); filter: brightness(1.05); }
+    .btn-mini.cosmic:active{ transform: translateY(0); filter: brightness(.98); }
+
+    /* Вторая кнопка — спокойная */
+    .btn-mini.light{ background:#334155; }
+
+    .warn{
+      background:#fff7ed; border:1px solid #fdba74; color:#9a3412;
+      font-weight:900; border-radius:14px; padding:10px 12px;
+    }
+    .ok{
+      background:#ecfdf5; border:1px solid #6ee7b7; color:#065f46;
+      font-weight:900; border-radius:14px; padding:10px 12px;
+    }
+    .topic{ font-weight:900; margin:0 0 6px; }
+    .small{ color:#334155; font-weight:700; }
+    ul{ margin:8px 0 0 18px; }
+    .small{
+      color:#334155;
+      font-weight:700;
+      white-space: pre-line;
+      line-height: 1.35;
+    }
+  </style>
+</head>
+
+<body>
+<div class="phone">
+  <div class="phone__top"></div>
+
+  <div class="screen">
+    <div class="page-title">{% trans "AIStatHelper" %}</div>
+
+    <div class="card meta">
+      <p><b>{% trans "Student" %}:</b> {{ snapshot.stats.student }}</p>
+      <p><b>{% trans "Generated" %}:</b> {{ snapshot.stats.generated_at }}</p>
+      <p><b>{% trans "Python attempts (Teacher)" %}:</b> {{ snapshot.stats.teacher_python_attempts }}</p>
+      <p><b>{% trans "Python attempts (Basic)" %}:</b> {{ snapshot.stats.basic_python_attempts }}</p>
+      <p><b>{% trans "Top wrong frequency" %}:</b> {{ snapshot.stats.top_wrong_count }}</p>
+
+      <div class="btn-row">
+        <form method="post" style="flex:1;">
+          {% csrf_token %}
+          <button class="btn-mini cosmic" type="submit" name="action" value="analyze">{% trans "Analyze" %}</button>
+        </form>
+
+        <form method="post" style="flex:1;">
+          {% csrf_token %}
+          <button class="btn-mini light" type="submit" name="action" value="refresh">{% trans "Refresh" %}</button>
+        </form>
+      </div>
+
+      <div class="btn-row">
+        <a class="btn-mini light" href="{{ menu_url }}">{% trans "Main menu" %}</a>
+      </div>
+    </div>
+
+    {% if error %}
+      <div class="card warn">{% trans "Error" %}: {{ error }}</div>
+    {% endif %}
+
+    {% if is_stale %}
+      <div class="card warn">
+        {% trans "Progress has changed. Press" %} <b>{% trans "Refresh" %}</b> {% trans "to update analysis." %}
+      </div>
+    {% endif %}
+
+    {% if has_report %}
+      <div class="card">
+        <div class="topic">{% trans "Summary" %}</div>
+        <div class="small">{{ report.summary }}</div>
+      </div>
+
+      {% if report.weak_topics %}
+        <div class="card">
+          <div class="topic">{% trans "Weak topics" %}</div>
+          {% for t in report.weak_topics %}
+            <div style="margin:10px 0;">
+              <div class="topic">• {{ t.topic }}</div>
+              <div class="small"><b>{% trans "Why weak" %}:</b> {{ t.why_weak }}</div>
+              <div class="small" style="margin-top:6px;"><b>{% trans "Explanation" %}:</b> {{ t.explanation }}</div>
+
+              {% if t.mini_tasks %}
+                <div class="small" style="margin-top:6px;"><b>{% trans "Mini tasks" %}:</b></div>
+                <ul class="small">
+                  {% for s in t.mini_tasks %}
+                    <li>{{ s }}</li>
+                  {% endfor %}
+                </ul>
+              {% endif %}
+            </div>
+          {% endfor %}
+        </div>
+      {% endif %}
+
+      {% if report.priority_plan %}
+        <div class="card">
+          <div class="topic">{% trans "Priority plan" %}</div>
+          <ul class="small">
+            {% for s in report.priority_plan %}
+              <li>{{ s }}</li>
+            {% endfor %}
+          </ul>
+        </div>
+      {% endif %}
+    {% else %}
+      <div class="card ok">
+        {% trans "Press" %} <b>{% trans "Analyze" %}</b> {% trans "to get your personal Python analysis." %}
+      </div>
+    {% endif %}
+  </div>
+
+  <div class="phone__bottom"></div>
+</div>
+</body>
+</html>

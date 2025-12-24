@@ -1,0 +1,215 @@
+{% load static i18n %}
+<!DOCTYPE html>
+<html lang="{{ LANGUAGE_CODE }}">
+<head>
+  <meta charset="UTF-8" />
+  <title>{% trans "Teacher – Students" %}</title>
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+  <style>
+    .screen{
+      padding-left:16px !important;
+      padding-right:16px !important;
+      box-sizing:border-box !important;
+    }
+
+    .profile-header{
+      font-size:22px !important;
+      font-weight:900 !important;
+      padding:18px 16px !important;
+      border-radius:22px !important;
+      text-align:center !important;
+      margin:10px 0 14px !important;
+    }
+
+    .screen form{ width:100%; box-sizing:border-box; }
+
+    .students-list-full{
+      margin-top: 14px;
+      display:flex;
+      flex-direction:column;
+      gap:12px;
+    }
+
+    .student-card-full{
+      width:100%;
+      box-sizing:border-box;
+      background: rgba(255,255,255,.78);
+      border:1px solid rgba(148,163,184,.28);
+      border-radius:18px;
+      padding:14px 14px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      box-shadow:0 12px 24px rgba(148,163,184,.45);
+      transition: transform .12s ease, box-shadow .12s ease;
+    }
+    .student-card-full:hover{
+      transform: translateY(-1px);
+      box-shadow:0 18px 30px rgba(148,163,184,.6);
+    }
+
+    .student-card-left{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      flex:1;
+      min-width:0;
+      cursor:pointer;
+    }
+
+    .student-card-check{
+      flex:0 0 auto;
+      width:18px;
+      height:18px;
+      accent-color:#2563eb;
+    }
+
+    .student-card-info{
+      display:flex;
+      flex-direction:column;
+      gap:4px;
+      min-width:0;
+    }
+
+    .student-card-name{
+      font-weight:900;
+      color:#0f172a;
+      word-break:break-word;
+      line-height:1.1;
+    }
+
+    .student-card-sub{
+      color:#475569;
+      font-weight:700;
+      font-size:12px;
+      word-break:break-word;
+    }
+
+    .student-card-badge{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:6px;
+      padding:3px 10px;
+      border-radius:999px;
+      background:#eef4ff;
+      border:1px solid rgba(37,99,235,.20);
+      color:#1e3a8a;
+      font-weight:900;
+      font-size:12px;
+      width:max-content;
+    }
+
+    .student-card-icon{
+      flex:0 0 auto;
+      width:46px;
+      height:46px;
+      border-radius:16px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background:#0b1220;
+      color:#fff;
+      text-decoration:none;
+      font-size:18px;
+      box-shadow:0 12px 24px rgba(15,23,42,.18);
+      transition: transform .12s ease, filter .12s ease;
+    }
+    .student-card-icon:hover{
+      transform: translateY(-1px);
+      filter: brightness(1.05);
+    }
+
+    .form-group{ margin-top:16px; }
+
+    .btn-primary{
+      margin-top:12px !important;
+      border-radius:999px !important;
+      font-weight:900 !important;
+    }
+
+    .groups-btn-home{
+      margin-top:12px !important;
+      border-radius:18px !important;
+      padding:14px 0 !important;
+      font-weight:900 !important;
+    }
+  </style>
+</head>
+
+<body>
+<div class="phone">
+  <div class="phone__top"></div>
+
+  <div class="screen">
+
+    <div class="profile-header">{% trans "Students" %}</div>
+
+    <form method="post" action="{% url 'teacher_students' %}">
+      {% csrf_token %}
+
+      <div class="students-list-full">
+        {% for s in students %}
+          <div class="student-card-full">
+
+            <label class="student-card-left">
+              <input type="checkbox"
+                     name="selected_students"
+                     value="{{ s.id }}"
+                     class="student-card-check">
+
+              <div class="student-card-info">
+                <div class="student-card-name">{{ s.username }}</div>
+                <div class="student-card-sub">{{ s.email|default:"—" }}</div>
+
+                <div class="student-card-badge">
+                  {% trans "Group" %}:
+                  {% if s.group %}
+                    {{ s.group.name }}
+                  {% else %}
+                    —
+                  {% endif %}
+                </div>
+              </div>
+            </label>
+
+            <a href="{% url 'teacher_student_profile' s.id %}"
+               class="student-card-icon"
+               title="{% trans 'Open profile' %}"
+               aria-label="{% trans 'Open profile' %}">
+              👤
+            </a>
+
+          </div>
+        {% empty %}
+          <p class="small-text center">{% trans "No students yet." %}</p>
+        {% endfor %}
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">{% trans "Add selected students to group" %}</label>
+        <select name="group_id" class="form-input" required>
+          <option value="">{% trans "Select group" %}</option>
+          {% for g in groups %}
+            <option value="{{ g.id }}">{{ g.name }}</option>
+          {% endfor %}
+        </select>
+      </div>
+
+      <button type="submit" class="btn-primary">
+        {% trans "Add to group" %}
+      </button>
+
+      <a href="{% url 'teacher_menu' %}" class="groups-btn-home">
+        {% trans "Main menu" %}
+      </a>
+    </form>
+
+  </div>
+
+  <div class="phone__bottom"></div>
+</div>
+</body>
+</html>

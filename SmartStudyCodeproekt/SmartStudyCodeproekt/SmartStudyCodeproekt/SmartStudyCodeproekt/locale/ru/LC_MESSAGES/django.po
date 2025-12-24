@@ -1,0 +1,1077 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-12-19 03:53+0500\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: ru\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || "
+"(n%100>=11 && n%100<=14)? 2 : 3);\n"
+
+#: .\webapp\templates\webapp\add_questions.html:6
+#: .\webapp\templates\webapp\add_questions.html:14
+msgid "Add questions"
+msgstr ""
+
+#: .\webapp\templates\webapp\add_questions.html:16
+#: .\webapp\templates\webapp\edit_question.html:21
+#: .\webapp\templates\webapp\student_tests.html:299
+msgid "Test"
+msgstr ""
+
+#: .\webapp\templates\webapp\add_questions.html:32
+msgid "correct"
+msgstr ""
+
+#: .\webapp\templates\webapp\add_questions.html:36
+msgid "no answers yet"
+msgstr ""
+
+#: .\webapp\templates\webapp\add_questions.html:48
+#: .\webapp\templates\webapp\student\tests.html:215
+msgid "Question"
+msgstr ""
+
+#: .\webapp\templates\webapp\add_questions.html:51
+msgid "Type question here"
+msgstr ""
+
+#: .\webapp\templates\webapp\add_questions.html:56
+msgid "Answers (choose correct)"
+msgstr ""
+
+#: .\webapp\templates\webapp\add_questions.html:63
+msgid "Answer 1"
+msgstr ""
+
+#: .\webapp\templates\webapp\add_questions.html:72
+msgid "Answer 2"
+msgstr ""
+
+#: .\webapp\templates\webapp\add_questions.html:81
+msgid "Answer 3"
+msgstr ""
+
+#: .\webapp\templates\webapp\add_questions.html:90
+msgid "Answer 4"
+msgstr ""
+
+#: .\webapp\templates\webapp\add_questions.html:99
+msgid "Add question"
+msgstr ""
+
+#: .\webapp\templates\webapp\add_questions.html:108
+msgid "Finish & preview"
+msgstr ""
+
+#: .\webapp\templates\webapp\basic_adaptive_test.html:6
+msgid "Adaptive test"
+msgstr ""
+
+#: .\webapp\templates\webapp\basic_adaptive_test.html:84
+#: .\webapp\templates\webapp\create_test.html:58
+#: .\webapp\templates\webapp\student\tests.html:214
+#: .\webapp\templates\webapp\student_tests.html:301
+#: .\webapp\templates\webapp\teacher_tests.html:203
+#: .\webapp\templates\webapp\topic_form.html:47
+#: .\webapp\templates\webapp\topics_list.html:35
+msgid "Difficulty"
+msgstr ""
+
+#: .\webapp\templates\webapp\basic_adaptive_test.html:88
+msgid "Python"
+msgstr ""
+
+#: .\webapp\templates\webapp\basic_adaptive_test.html:91
+msgid "difficulty"
+msgstr ""
+
+#: .\webapp\templates\webapp\basic_test_finish.html:6
+#: .\webapp\templates\webapp\test_finish.html:7
+msgid "Test Result"
+msgstr ""
+
+#: .\webapp\templates\webapp\basic_test_finish.html:91
+msgid "Test completed"
+msgstr ""
+
+#: .\webapp\templates\webapp\basic_test_finish.html:100
+#: .\webapp\templates\webapp\student\teacher_test_finish.html:134
+#: .\webapp\templates\webapp\test_preview.html:293
+msgid "Correct"
+msgstr ""
+
+#: .\webapp\templates\webapp\basic_test_finish.html:106
+msgid "Incorrect"
+msgstr ""
+
+#: .\webapp\templates\webapp\basic_test_finish.html:112
+msgid "Total"
+msgstr ""
+
+#: .\webapp\templates\webapp\basic_test_finish.html:118
+#: .\webapp\templates\webapp\test_finish.html:138
+msgid "Go to main menu"
+msgstr ""
+
+#: .\webapp\templates\webapp\change_profile_data.html:6
+#: .\webapp\templates\webapp\change_profile_data.html:89
+msgid "Change profile data"
+msgstr ""
+
+#: .\webapp\templates\webapp\change_profile_data.html:90
+msgid "Update your email or password"
+msgstr ""
+
+#: .\webapp\templates\webapp\change_profile_data.html:98
+msgid "Enter current email:"
+msgstr ""
+
+#: .\webapp\templates\webapp\change_profile_data.html:99
+msgid "your email"
+msgstr ""
+
+#: .\webapp\templates\webapp\change_profile_data.html:101
+msgid "Enter current password:"
+msgstr ""
+
+#: .\webapp\templates\webapp\change_profile_data.html:102
+msgid "your password"
+msgstr ""
+
+#: .\webapp\templates\webapp\change_profile_data.html:105
+#: .\webapp\templates\webapp\create_test.html:66
+msgid "Next"
+msgstr ""
+
+#: .\webapp\templates\webapp\change_profile_data.html:106
+#: .\webapp\templates\webapp\change_profile_data.html:126
+#: .\webapp\templates\webapp\student_progress.html:230
+#: .\webapp\templates\webapp\teacher_student_profile.html:198
+#: .\webapp\templates\webapp\topic_form.html:60
+msgid "Back"
+msgstr ""
+
+#: .\webapp\templates\webapp\change_profile_data.html:118
+msgid "Enter new email:"
+msgstr ""
+
+#: .\webapp\templates\webapp\change_profile_data.html:119
+msgid "new email"
+msgstr ""
+
+#: .\webapp\templates\webapp\change_profile_data.html:121
+msgid "Enter new password:"
+msgstr ""
+
+#: .\webapp\templates\webapp\change_profile_data.html:122
+msgid "new password"
+msgstr ""
+
+#: .\webapp\templates\webapp\change_profile_data.html:125
+msgid "Update"
+msgstr ""
+
+#: .\webapp\templates\webapp\create_group.html:6
+#: .\webapp\templates\webapp\create_group.html:16
+#: .\webapp\templates\webapp\create_group.html:38
+#: .\webapp\templates\webapp\teacher_groups.html:246
+#: .\webapp\templates\webapp\teacher_groups.html:312
+msgid "Create group"
+msgstr ""
+
+#: .\webapp\templates\webapp\create_group.html:26
+msgid "Name of group"
+msgstr ""
+
+#: .\webapp\templates\webapp\create_group.html:29
+msgid "e.g. PO2401"
+msgstr ""
+
+#: .\webapp\templates\webapp\create_group.html:33
+#: .\webapp\templates\webapp\login.html:86
+#: .\webapp\templates\webapp\login.html:88
+#: .\webapp\templates\webapp\login_role.html:113
+#: .\webapp\templates\webapp\login_role.html:115
+#: .\webapp\templates\webapp\statistics.html:150
+#: .\webapp\templates\webapp\student_my_group.html:208
+#: .\webapp\templates\webapp\teacher_auth.html:6
+#: .\webapp\templates\webapp\teacher_groups.html:6
+#: .\webapp\templates\webapp\teacher_login.html:6
+#: .\webapp\templates\webapp\teacher_menu.html:6
+#: .\webapp\templates\webapp\teacher_profile.html:6
+#: .\webapp\templates\webapp\teacher_profile.html:165
+#: .\webapp\templates\webapp\teacher_profile.html:166
+#: .\webapp\templates\webapp\teacher_register.html:6
+#: .\webapp\templates\webapp\teacher_student_profile.html:181
+msgid "Teacher"
+msgstr ""
+
+#: .\webapp\templates\webapp\create_group.html:41
+msgid "Back to groups"
+msgstr ""
+
+#: .\webapp\templates\webapp\create_test.html:6
+#: .\webapp\templates\webapp\create_test.html:16
+#: .\webapp\templates\webapp\teacher_groups.html:247
+#: .\webapp\templates\webapp\teacher_menu.html:158
+#: .\webapp\templates\webapp\teacher_menu.html:159
+msgid "Create test"
+msgstr ""
+
+#: .\webapp\templates\webapp\create_test.html:20
+msgid "Test has been created successfully"
+msgstr ""
+
+#: .\webapp\templates\webapp\create_test.html:28
+msgid "Test name"
+msgstr ""
+
+#: .\webapp\templates\webapp\create_test.html:30
+msgid "Beginner level (Python basics)"
+msgstr ""
+
+#: .\webapp\templates\webapp\create_test.html:34
+#: .\webapp\templates\webapp\student_my_group.html:254
+#: .\webapp\templates\webapp\student_progress.html:218
+#: .\webapp\templates\webapp\student_tests.html:300
+#: .\webapp\templates\webapp\teacher_student_profile.html:187
+#: .\webapp\templates\webapp\teacher_tests.html:199
+msgid "Topic"
+msgstr ""
+
+#: .\webapp\templates\webapp\create_test.html:36
+msgid "Select topic"
+msgstr ""
+
+#: .\webapp\templates\webapp\create_test.html:44
+msgid "Time limit (minutes)"
+msgstr ""
+
+#: .\webapp\templates\webapp\create_test.html:46
+#: .\webapp\templates\webapp\teacher_tests.html:216
+msgid "No limit"
+msgstr ""
+
+#: .\webapp\templates\webapp\create_test.html:47
+#: .\webapp\templates\webapp\create_test.html:48
+#: .\webapp\templates\webapp\create_test.html:49
+#: .\webapp\templates\webapp\create_test.html:50
+#: .\webapp\templates\webapp\create_test.html:51
+#: .\webapp\templates\webapp\create_test.html:52
+#: .\webapp\templates\webapp\create_test.html:53
+msgid "min"
+msgstr ""
+
+#: .\webapp\templates\webapp\create_test.html:60
+msgid "Beginner"
+msgstr ""
+
+#: .\webapp\templates\webapp\create_test.html:61
+msgid "Medium"
+msgstr ""
+
+#: .\webapp\templates\webapp\create_test.html:62
+msgid "Advanced"
+msgstr ""
+
+#: .\webapp\templates\webapp\create_test.html:70
+#: .\webapp\templates\webapp\settings.html:138
+#: .\webapp\templates\webapp\statistics.html:167
+#: .\webapp\templates\webapp\student_menu.html:6
+#: .\webapp\templates\webapp\student_menu.html:197
+#: .\webapp\templates\webapp\student_my_group.html:272
+#: .\webapp\templates\webapp\student_profile.html:172
+#: .\webapp\templates\webapp\student_tests.html:318
+#: .\webapp\templates\webapp\teacher_groups.html:307
+#: .\webapp\templates\webapp\teacher_groups.html:315
+#: .\webapp\templates\webapp\teacher_menu.html:6
+#: .\webapp\templates\webapp\teacher_menu.html:149
+#: .\webapp\templates\webapp\teacher_profile.html:195
+#: .\webapp\templates\webapp\teacher_profile.html:197
+#: .\webapp\templates\webapp\teacher_students.html:206
+#: .\webapp\templates\webapp\teacher_tests.html:243
+#: .\webapp\templates\webapp\test_take.html:250
+#: .\webapp\templates\webapp\topics_list.html:64
+msgid "Main menu"
+msgstr ""
+
+#: .\webapp\templates\webapp\edit_question.html:6
+#: .\webapp\templates\webapp\edit_question.html:16
+msgid "Edit question"
+msgstr ""
+
+#: .\webapp\templates\webapp\edit_question.html:18
+msgid "You can change the text of the question and answers."
+msgstr ""
+
+#: .\webapp\templates\webapp\edit_question.html:28
+msgid "Question text"
+msgstr ""
+
+#: .\webapp\templates\webapp\edit_question.html:35
+msgid "Answers"
+msgstr ""
+
+#: .\webapp\templates\webapp\edit_question.html:40
+msgid "Answer"
+msgstr ""
+
+#: .\webapp\templates\webapp\edit_question.html:54
+msgid "Correct answer"
+msgstr ""
+
+#: .\webapp\templates\webapp\edit_question.html:58
+msgid "No answers to edit."
+msgstr ""
+
+#: .\webapp\templates\webapp\edit_question.html:62
+#: .\webapp\templates\webapp\topic_form.html:54
+msgid "Save"
+msgstr ""
+
+#: .\webapp\templates\webapp\edit_question.html:68
+msgid "Cancel"
+msgstr ""
+
+#: .\webapp\templates\webapp\index.html:6
+msgid "Welcome"
+msgstr ""
+
+#: .\webapp\templates\webapp\index.html:97
+msgid "CodeSmartStudy hero"
+msgstr ""
+
+#: .\webapp\templates\webapp\index.html:101
+msgid "Welcome to"
+msgstr ""
+
+#: .\webapp\templates\webapp\index.html:105
+msgid "Start"
+msgstr ""
+
+#: .\webapp\templates\webapp\login.html:6
+#: .\webapp\templates\webapp\login.html:81
+#: .\webapp\templates\webapp\login_role.html:6
+#: .\webapp\templates\webapp\login_role.html:108
+msgid "Login as"
+msgstr ""
+
+#: .\webapp\templates\webapp\login.html:93
+#: .\webapp\templates\webapp\login.html:95
+#: .\webapp\templates\webapp\login_role.html:121
+#: .\webapp\templates\webapp\login_role.html:123
+#: .\webapp\templates\webapp\student_auth.html:6
+#: .\webapp\templates\webapp\student_login.html:6
+#: .\webapp\templates\webapp\student_login.html:16
+#: .\webapp\templates\webapp\student_menu.html:6
+#: .\webapp\templates\webapp\student_my_group.html:6
+#: .\webapp\templates\webapp\student_profile.html:6
+#: .\webapp\templates\webapp\student_profile.html:142
+#: .\webapp\templates\webapp\student_profile.html:143
+#: .\webapp\templates\webapp\student_progress.html:6
+#: .\webapp\templates\webapp\student_register.html:6
+#: .\webapp\templates\webapp\student_tests.html:6
+#: .\webapp\templates\webapp\teacher_student_profile.html:124
+msgid "Student"
+msgstr ""
+
+#: .\webapp\templates\webapp\login_role.html:109
+msgid "Choose your role to continue"
+msgstr ""
+
+#: .\webapp\templates\webapp\login_role.html:116
+msgid "Create tests, manage groups and view statistics"
+msgstr ""
+
+#: .\webapp\templates\webapp\login_role.html:124
+msgid "Take tests, track progress and see your group"
+msgstr ""
+
+#: .\webapp\templates\webapp\schedule_test.html:6
+#, python-format
+msgid "Schedule test – %(test.title)s"
+msgstr ""
+
+#: .\webapp\templates\webapp\schedule_test.html:41
+msgid "Schedule test"
+msgstr ""
+
+#: .\webapp\templates\webapp\schedule_test.html:54
+#: .\webapp\templates\webapp\student_my_group.html:203
+#: .\webapp\templates\webapp\student_profile.html:152
+#: .\webapp\templates\webapp\student_tests.html:306
+#: .\webapp\templates\webapp\teacher_student_profile.html:136
+#: .\webapp\templates\webapp\teacher_students.html:168
+msgid "Group"
+msgstr ""
+
+#: .\webapp\templates\webapp\schedule_test.html:56
+msgid "Choose group"
+msgstr ""
+
+#: .\webapp\templates\webapp\schedule_test.html:64
+msgid "Date & time"
+msgstr ""
+
+#: .\webapp\templates\webapp\schedule_test.html:68
+msgid "Schedule"
+msgstr ""
+
+#: .\webapp\templates\webapp\schedule_test.html:72
+msgid "Back to my tests"
+msgstr ""
+
+#: .\webapp\templates\webapp\settings.html:7
+#: .\webapp\templates\webapp\settings.html:83
+#: .\webapp\templates\webapp\student_menu.html:192
+#: .\webapp\templates\webapp\student_menu.html:193
+#: .\webapp\templates\webapp\teacher_menu.html:144
+#: .\webapp\templates\webapp\teacher_menu.html:145
+msgid "Settings"
+msgstr ""
+
+#: .\webapp\templates\webapp\settings.html:90
+msgid "Language"
+msgstr ""
+
+#: .\webapp\templates\webapp\settings.html:121
+#: .\webapp\templates\webapp\student_login.html:33
+#: .\webapp\templates\webapp\student_register.html:149
+#: .\webapp\templates\webapp\teacher_login.html:110
+#: .\webapp\templates\webapp\teacher_register.html:132
+msgid "Password"
+msgstr ""
+
+#: .\webapp\templates\webapp\settings.html:128
+msgid "Change profile"
+msgstr ""
+
+#: .\webapp\templates\webapp\settings.html:132
+msgid "Log out"
+msgstr ""
+
+#: .\webapp\templates\webapp\statistics.html:6
+#: .\webapp\templates\webapp\statistics.html:47
+#: .\webapp\templates\webapp\teacher_menu.html:163
+#: .\webapp\templates\webapp\teacher_menu.html:164
+msgid "Statistics"
+msgstr ""
+
+#: .\webapp\templates\webapp\statistics.html:53
+msgid "Select test"
+msgstr ""
+
+#: .\webapp\templates\webapp\statistics.html:56
+#: .\webapp\templates\webapp\teacher_tests.html:189
+msgid "All tests"
+msgstr ""
+
+#: .\webapp\templates\webapp\statistics.html:60
+#: .\webapp\templates\webapp\student_tests.html:244
+msgid "Teacher tests"
+msgstr ""
+
+#: .\webapp\templates\webapp\statistics.html:74
+#: .\webapp\templates\webapp\student_tests.html:243
+msgid "Basic tests"
+msgstr ""
+
+#: .\webapp\templates\webapp\statistics.html:88
+#: .\webapp\templates\webapp\teacher_students.html:194
+msgid "Select group"
+msgstr ""
+
+#: .\webapp\templates\webapp\statistics.html:91
+msgid "All groups"
+msgstr ""
+
+#: .\webapp\templates\webapp\statistics.html:103
+msgid "Select student"
+msgstr ""
+
+#: .\webapp\templates\webapp\statistics.html:106
+msgid "All students"
+msgstr ""
+
+#: .\webapp\templates\webapp\statistics.html:117
+msgid "Show"
+msgstr ""
+
+#: .\webapp\templates\webapp\statistics.html:122
+#: .\webapp\templates\webapp\student_progress.html:179
+msgid "Total attempts"
+msgstr ""
+
+#: .\webapp\templates\webapp\statistics.html:127
+#: .\webapp\templates\webapp\student_progress.html:189
+msgid "Average score"
+msgstr ""
+
+#: .\webapp\templates\webapp\statistics.html:134
+#: .\webapp\templates\webapp\student_my_group.html:215
+#: .\webapp\templates\webapp\teacher_menu.html:153
+#: .\webapp\templates\webapp\teacher_menu.html:154
+#: .\webapp\templates\webapp\teacher_students.html:148
+msgid "Students"
+msgstr ""
+
+#: .\webapp\templates\webapp\statistics.html:139
+#: .\webapp\templates\webapp\student_menu.html:203
+#: .\webapp\templates\webapp\student_menu.html:207
+#: .\webapp\templates\webapp\student_my_group.html:220
+#: .\webapp\templates\webapp\student_tests.html:6
+#: .\webapp\templates\webapp\student_tests.html:240
+msgid "Tests"
+msgstr ""
+
+#: .\webapp\templates\webapp\statistics.html:144
+#: .\webapp\templates\webapp\teacher_student_profile.html:175
+msgid "Attempts overview"
+msgstr ""
+
+#: .\webapp\templates\webapp\statistics.html:150
+#: .\webapp\templates\webapp\teacher_student_profile.html:181
+msgid "Basic"
+msgstr ""
+
+#: .\webapp\templates\webapp\statistics.html:156
+msgid "Topic:"
+msgstr ""
+
+#: .\webapp\templates\webapp\statistics.html:157
+msgid "Author:"
+msgstr ""
+
+#: .\webapp\templates\webapp\statistics.html:158
+msgid "Score:"
+msgstr ""
+
+#: .\webapp\templates\webapp\statistics.html:159
+msgid "Date:"
+msgstr ""
+
+#: .\webapp\templates\webapp\statistics.html:163
+msgid "No attempts yet."
+msgstr ""
+
+#: .\webapp\templates\webapp\student\teacher_test_finish.html:6
+msgid "Teacher Test – Result"
+msgstr ""
+
+#: .\webapp\templates\webapp\student\teacher_test_finish.html:121
+msgid "Teacher test result"
+msgstr ""
+
+#: .\webapp\templates\webapp\student\teacher_test_finish.html:132
+msgid "Total questions"
+msgstr ""
+
+#: .\webapp\templates\webapp\student\teacher_test_finish.html:133
+msgid "Answered"
+msgstr ""
+
+#: .\webapp\templates\webapp\student\teacher_test_finish.html:135
+msgid "Wrong (incl. unanswered)"
+msgstr ""
+
+#: .\webapp\templates\webapp\student\teacher_test_finish.html:138
+msgid "Back to tests"
+msgstr ""
+
+#: .\webapp\templates\webapp\student\tests.html:6
+#: .\webapp\templates\webapp\student_progress.html:212
+msgid "Teacher test"
+msgstr ""
+
+#: .\webapp\templates\webapp\student_auth.html:6
+#: .\webapp\templates\webapp\teacher_auth.html:6
+msgid "Auth choice"
+msgstr ""
+
+#: .\webapp\templates\webapp\student_auth.html:20
+#: .\webapp\templates\webapp\teacher_auth.html:75
+msgid "Sign in"
+msgstr ""
+
+#: .\webapp\templates\webapp\student_auth.html:21
+#: .\webapp\templates\webapp\teacher_auth.html:79
+msgid "Registration"
+msgstr ""
+
+#: .\webapp\templates\webapp\student_login.html:6
+#: .\webapp\templates\webapp\student_login.html:16
+#: .\webapp\templates\webapp\student_login.html:41
+#: .\webapp\templates\webapp\student_register.html:178
+#: .\webapp\templates\webapp\teacher_login.html:6
+#: .\webapp\templates\webapp\teacher_login.html:118
+#: .\webapp\templates\webapp\teacher_register.html:148
+msgid "Login"
+msgstr ""
+
+#: .\webapp\templates\webapp\student_login.html:23
+#: .\webapp\templates\webapp\student_profile.html:163
+#: .\webapp\templates\webapp\student_register.html:159
+#: .\webapp\templates\webapp\teacher_profile.html:175
+#: .\webapp\templates\webapp\teacher_register.html:123
+#: .\webapp\templates\webapp\teacher_student_profile.html:149
+msgid "Email"
+msgstr ""
+
+#: .\webapp\templates\webapp\student_login.html:27
+#: .\webapp\templates\webapp\student_register.html:163
+#: .\webapp\templates\webapp\teacher_register.html:127
+msgid "email"
+msgstr ""
+
+#: .\webapp\templates\webapp\student_login.html:37
+#: .\webapp\templates\webapp\student_register.html:153
+#: .\webapp\templates\webapp\teacher_login.html:114
+#: .\webapp\templates\webapp\teacher_register.html:136
+msgid "password"
+msgstr ""
+
+#: .\webapp\templates\webapp\student_login.html:53
+#: .\webapp\templates\webapp\teacher_login.html:122
+msgid "Don't have an account?"
+msgstr ""
+
+#: .\webapp\templates\webapp\student_login.html:54
+#: .\webapp\templates\webapp\student_register.html:6
+#: .\webapp\templates\webapp\student_register.html:168
+#: .\webapp\templates\webapp\teacher_login.html:123
+#: .\webapp\templates\webapp\teacher_register.html:6
+#: .\webapp\templates\webapp\teacher_register.html:101
+#: .\webapp\templates\webapp\teacher_register.html:141
+msgid "Register"
+msgstr ""
+
+#: .\webapp\templates\webapp\student_menu.html:187
+#: .\webapp\templates\webapp\student_menu.html:188
+#: .\webapp\templates\webapp\student_profile.html:6
+#: .\webapp\templates\webapp\student_profile.html:137
+#: .\webapp\templates\webapp\teacher_menu.html:134
+#: .\webapp\templates\webapp\teacher_menu.html:135
+#: .\webapp\templates\webapp\teacher_profile.html:6
+#: .\webapp\templates\webapp\teacher_profile.html:160
+#: .\webapp\templates\webapp\teacher_student_profile.html:118
+msgid "Profile"
+msgstr ""
+
+#: .\webapp\templates\webapp\student_menu.html:208
+msgid "View and take tests"
+msgstr ""
+
+#: .\webapp\templates\webapp\student_menu.html:216
+#: .\webapp\templates\webapp\student_menu.html:220
+#: .\webapp\templates\webapp\student_my_group.html:6
+#: .\webapp\templates\webapp\student_my_group.html:195
+msgid "My group"
+msgstr ""
+
+#: .\webapp\templates\webapp\student_menu.html:221
+msgid "See your classmates and assigned tests"
+msgstr ""
+
+#: .\webapp\templates\webapp\student_my_group.html:198
+msgid "You are not assigned to any group yet."
+msgstr ""
+
+#: .\webapp\templates\webapp\student_my_group.html:227
+msgid "Classmates"
+msgstr ""
+
+#: .\webapp\templates\webapp\student_my_group.html:239
+msgid "No classmates in this group yet."
+msgstr ""
+
+#: .\webapp\templates\webapp\student_my_group.html:245
+msgid "Assigned tests"
+msgstr ""
+
+#: .\webapp\templates\webapp\student_my_group.html:260
+#: .\webapp\templates\webapp\student_tests.html:308
+#: .\webapp\templates\webapp\teacher_tests.html:207
+msgid "Questions"
+msgstr ""
+
+#: .\webapp\templates\webapp\student_my_group.html:266
+msgid "No assigned tests yet."
+msgstr ""
+
+#: .\webapp\templates\webapp\student_profile.html:147
+#: .\webapp\templates\webapp\teacher_profile.html:170
+#: .\webapp\templates\webapp\teacher_student_profile.html:129
+msgid "Nickname"
+msgstr ""
+
+#: .\webapp\templates\webapp\student_profile.html:168
+#: .\webapp\templates\webapp\student_progress.html:6
+msgid "Progress"
+msgstr ""
+
+#: .\webapp\templates\webapp\student_progress.html:175
+msgid "My progress"
+msgstr ""
+
+#: .\webapp\templates\webapp\student_progress.html:184
+msgid "Completed tests"
+msgstr ""
+
+#: .\webapp\templates\webapp\student_progress.html:194
+msgid "Best result"
+msgstr ""
+
+#: .\webapp\templates\webapp\student_progress.html:200
+msgid "History"
+msgstr ""
+
+#: .\webapp\templates\webapp\student_progress.html:201
+msgid "Latest attempts"
+msgstr ""
+
+#: .\webapp\templates\webapp\student_progress.html:210
+msgid "Basic test"
+msgstr ""
+
+#: .\webapp\templates\webapp\student_progress.html:221
+#: .\webapp\templates\webapp\teacher_student_profile.html:190
+msgid "Date"
+msgstr ""
+
+#: .\webapp\templates\webapp\student_progress.html:222
+#: .\webapp\templates\webapp\teacher_student_profile.html:189
+msgid "Score"
+msgstr ""
+
+#: .\webapp\templates\webapp\student_progress.html:226
+msgid "You haven't taken any tests yet."
+msgstr ""
+
+#: .\webapp\templates\webapp\student_register.html:130
+msgid "Create account"
+msgstr ""
+
+#: .\webapp\templates\webapp\student_register.html:131
+msgid "Register as a student to start taking tests"
+msgstr ""
+
+#: .\webapp\templates\webapp\student_register.html:139
+#: .\webapp\templates\webapp\teacher_login.html:101
+#: .\webapp\templates\webapp\teacher_register.html:114
+msgid "Username"
+msgstr ""
+
+#: .\webapp\templates\webapp\student_register.html:143
+#: .\webapp\templates\webapp\teacher_login.html:105
+#: .\webapp\templates\webapp\teacher_register.html:118
+msgid "username"
+msgstr ""
+
+#: .\webapp\templates\webapp\student_register.html:177
+#: .\webapp\templates\webapp\teacher_register.html:146
+msgid "Already have an account?"
+msgstr ""
+
+#: .\webapp\templates\webapp\student_tests.html:252
+msgid "Python Basics"
+msgstr ""
+
+#: .\webapp\templates\webapp\student_tests.html:262
+msgid "Logic and Data Structures"
+msgstr ""
+
+#: .\webapp\templates\webapp\student_tests.html:272
+msgid "Files, Exceptions, Functions"
+msgstr ""
+
+#: .\webapp\templates\webapp\student_tests.html:294
+#: .\webapp\templates\webapp\student_tests.html:295
+#: .\webapp\templates\webapp\student_tests.html:395
+msgid "Locked"
+msgstr ""
+
+#: .\webapp\templates\webapp\student_tests.html:302
+#: .\webapp\templates\webapp\teacher_student_profile.html:188
+msgid "Author"
+msgstr ""
+
+#: .\webapp\templates\webapp\student_tests.html:307
+msgid "Time"
+msgstr ""
+
+#: .\webapp\templates\webapp\student_tests.html:314
+msgid "No teacher tests have been scheduled for your group yet."
+msgstr ""
+
+#: .\webapp\templates\webapp\student_tests.html:325
+#: .\webapp\templates\webapp\student_tests.html:405
+msgid "Test is locked yet"
+msgstr ""
+
+#: .\webapp\templates\webapp\student_tests.html:386
+msgid "Open"
+msgstr ""
+
+#: .\webapp\templates\webapp\teacher_auth.html:70
+msgid "Choose an option to continue"
+msgstr ""
+
+#: .\webapp\templates\webapp\teacher_groups.html:6
+#: .\webapp\templates\webapp\teacher_groups.html:212
+#: .\webapp\templates\webapp\teacher_menu.html:139
+#: .\webapp\templates\webapp\teacher_menu.html:140
+msgid "Groups"
+msgstr ""
+
+#: .\webapp\templates\webapp\teacher_groups.html:230
+msgid "Open group"
+msgstr ""
+
+#: .\webapp\templates\webapp\teacher_groups.html:235
+msgid "students"
+msgstr ""
+
+#: .\webapp\templates\webapp\teacher_groups.html:241
+msgid "No groups yet."
+msgstr ""
+
+#: .\webapp\templates\webapp\teacher_groups.html:270
+#: .\webapp\templates\webapp\teacher_groups.html:271
+#: .\webapp\templates\webapp\teacher_students.html:180
+#: .\webapp\templates\webapp\teacher_students.html:181
+msgid "Open profile"
+msgstr ""
+
+#: .\webapp\templates\webapp\teacher_groups.html:282
+msgid "No students in this group yet."
+msgstr ""
+
+#: .\webapp\templates\webapp\teacher_groups.html:288
+msgid "Remove selected"
+msgstr ""
+
+#: .\webapp\templates\webapp\teacher_groups.html:292
+msgid "Restore to"
+msgstr ""
+
+#: .\webapp\templates\webapp\teacher_groups.html:303
+msgid "Restore selected"
+msgstr ""
+
+#: .\webapp\templates\webapp\teacher_groups.html:310
+msgid "Create a group to start."
+msgstr ""
+
+#: .\webapp\templates\webapp\teacher_login.html:87
+msgid "Teacher login"
+msgstr ""
+
+#: .\webapp\templates\webapp\teacher_login.html:91
+msgid "Enter your credentials to continue"
+msgstr ""
+
+#: .\webapp\templates\webapp\teacher_menu.html:168
+#: .\webapp\templates\webapp\teacher_menu.html:169
+#: .\webapp\templates\webapp\topic_form.html:7
+#: .\webapp\templates\webapp\topic_form.html:26
+#: .\webapp\templates\webapp\topics_list.html:6
+#: .\webapp\templates\webapp\topics_list.html:24
+msgid "Topics"
+msgstr ""
+
+#: .\webapp\templates\webapp\teacher_profile.html:181
+msgid "Number of tests"
+msgstr ""
+
+#: .\webapp\templates\webapp\teacher_profile.html:185
+msgid "Number of groups"
+msgstr ""
+
+#: .\webapp\templates\webapp\teacher_profile.html:191
+#: .\webapp\templates\webapp\teacher_tests.html:188
+msgid "My tests"
+msgstr ""
+
+#: .\webapp\templates\webapp\teacher_register.html:102
+msgid "Teacher account"
+msgstr ""
+
+#: .\webapp\templates\webapp\teacher_student_profile.html:6
+msgid "Student Profile"
+msgstr ""
+
+#: .\webapp\templates\webapp\teacher_student_profile.html:155
+msgid "Attempts"
+msgstr ""
+
+#: .\webapp\templates\webapp\teacher_student_profile.html:159
+msgid "Average"
+msgstr ""
+
+#: .\webapp\templates\webapp\teacher_student_profile.html:166
+msgid "Best"
+msgstr ""
+
+#: .\webapp\templates\webapp\teacher_student_profile.html:170
+msgid "Completed"
+msgstr ""
+
+#: .\webapp\templates\webapp\teacher_student_profile.html:194
+msgid "No progress yet."
+msgstr ""
+
+#: .\webapp\templates\webapp\teacher_students.html:6
+msgid "Teacher – Students"
+msgstr ""
+
+#: .\webapp\templates\webapp\teacher_students.html:187
+msgid "No students yet."
+msgstr ""
+
+#: .\webapp\templates\webapp\teacher_students.html:192
+msgid "Add selected students to group"
+msgstr ""
+
+#: .\webapp\templates\webapp\teacher_students.html:202
+msgid "Add to group"
+msgstr ""
+
+#: .\webapp\templates\webapp\teacher_tests.html:6
+msgid "Teacher – My tests"
+msgstr ""
+
+#: .\webapp\templates\webapp\teacher_tests.html:211
+msgid "Time limit"
+msgstr ""
+
+#: .\webapp\templates\webapp\teacher_tests.html:225
+msgid "Schedule / Reschedule"
+msgstr ""
+
+#: .\webapp\templates\webapp\teacher_tests.html:232
+#: .\webapp\templates\webapp\test_preview.html:303
+#: .\webapp\templates\webapp\topics_list.html:50
+msgid "Delete"
+msgstr ""
+
+#: .\webapp\templates\webapp\teacher_tests.html:238
+msgid "No tests available."
+msgstr ""
+
+#: .\webapp\templates\webapp\test_finish.html:122
+msgid "Test completed!"
+msgstr ""
+
+#: .\webapp\templates\webapp\test_finish.html:126
+msgid "Beginner level"
+msgstr ""
+
+#: .\webapp\templates\webapp\test_preview.html:6
+#, python-format
+msgid "Preview – %(title)s"
+msgstr ""
+
+#: .\webapp\templates\webapp\test_preview.html:265
+msgid "Test preview"
+msgstr ""
+
+#: .\webapp\templates\webapp\test_preview.html:266
+msgid "Review questions before publishing"
+msgstr ""
+
+#: .\webapp\templates\webapp\test_preview.html:270
+#, python-format
+msgid "Test: %(title)s"
+msgstr ""
+
+#: .\webapp\templates\webapp\test_preview.html:273
+#, python-format
+msgid "Questions: %(qcount)s"
+msgid_plural "Questions: %(qcount)s"
+msgstr[0] ""
+msgstr[1] ""
+
+#: .\webapp\templates\webapp\test_preview.html:297
+msgid "No answers yet"
+msgstr ""
+
+#: .\webapp\templates\webapp\test_preview.html:302
+#: .\webapp\templates\webapp\topic_form.html:7
+#: .\webapp\templates\webapp\topics_list.html:44
+msgid "Edit"
+msgstr ""
+
+#: .\webapp\templates\webapp\test_preview.html:308
+msgid "No questions yet."
+msgstr ""
+
+#: .\webapp\templates\webapp\test_preview.html:313
+msgid "Add another question"
+msgstr ""
+
+#: .\webapp\templates\webapp\test_preview.html:320
+msgid "Publish & go to main menu"
+msgstr ""
+
+#: .\webapp\templates\webapp\test_preview.html:324
+msgid "View my tests"
+msgstr ""
+
+#: .\webapp\templates\webapp\test_take.html:6
+#, python-format
+msgid "%(name)s – Test"
+msgstr ""
+
+#: .\webapp\templates\webapp\test_take.html:228
+#, python-format
+msgid "Question %(qi)s / %(qt)s"
+msgstr ""
+
+#: .\webapp\templates\webapp\test_take.html:230
+msgid "ID"
+msgstr ""
+
+#: .\webapp\templates\webapp\topic_form.html:7
+msgid "Create"
+msgstr ""
+
+#: .\webapp\templates\webapp\topic_form.html:30
+msgid "Edit topic"
+msgstr ""
+
+#: .\webapp\templates\webapp\topic_form.html:32
+msgid "Create a topic"
+msgstr ""
+
+#: .\webapp\templates\webapp\topic_form.html:40
+#: .\webapp\templates\webapp\topic_form.html:42
+msgid "Topic name"
+msgstr ""
+
+#: .\webapp\templates\webapp\topic_form.html:49
+msgid "e.g. Beginner, Intermediate"
+msgstr ""
+
+#: .\webapp\templates\webapp\topics_list.html:26
+msgid "All topics"
+msgstr ""
+
+#: .\webapp\templates\webapp\topics_list.html:55
+msgid "No topics yet."
+msgstr ""
+
+#: .\webapp\templates\webapp\topics_list.html:60
+msgid "Create topic"
+msgstr ""

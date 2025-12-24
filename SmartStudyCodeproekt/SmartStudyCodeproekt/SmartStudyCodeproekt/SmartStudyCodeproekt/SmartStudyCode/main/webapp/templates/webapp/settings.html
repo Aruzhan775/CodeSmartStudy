@@ -1,0 +1,149 @@
+{% load static i18n %}
+{% get_current_language as CUR_LANG %}
+<!DOCTYPE html>
+<html lang="{{ LANGUAGE_CODE }}">
+<head>
+    <meta charset="UTF-8">
+    <title>{% trans "Settings" %}</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+    <style>
+        .screen.centered{
+            justify-content:center;
+            align-items:center;
+            padding: 18px 16px;
+        }
+        .settings-wrap{
+            width:100%;
+            max-width: 392px;
+            display:flex;
+            flex-direction:column;
+            gap:14px;
+        }
+        .profile-header{
+            width: 100%;
+            max-width: 392px;
+            padding: 12px 0;
+            border-radius: 14px;
+            font-size: 18px;
+            font-weight: 800;
+            margin: 0 auto 6px;
+        }
+        .settings-block{
+            width: 100%;
+            max-width: 392px;
+            margin: 0 auto;
+            border-radius: 18px;
+        }
+        .mainmenu-btn{
+            width: 100%;
+            max-width: 392px;
+            height: 60px;
+            border-radius: 18px;
+            font-size: 18px;
+            font-weight: 800;
+        }
+
+        /* чтобы 3 кнопки влезли красиво */
+        .lang-buttons{
+            display:flex;
+            gap:10px;
+            align-items:center;
+        }
+        .lang-btn{
+            min-width: 54px;
+            height: 34px;
+            border-radius: 999px;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            font-weight:800;
+            text-decoration:none;
+            border: 1px solid rgba(148,163,184,.6);
+            background:#f8fafc;
+            color:#0f172a;
+            cursor:pointer;
+        }
+        .lang-btn.active{
+            background:#2563eb;
+            color:#fff;
+            border-color:#2563eb;
+        }
+    </style>
+</head>
+<body>
+
+<div class="phone">
+    <div class="phone__top"></div>
+
+    <div class="screen centered">
+
+        <div class="settings-wrap">
+
+            <div class="profile-header">{% trans "Settings" %}</div>
+
+            <div class="settings-block">
+
+                {% get_current_language as CUR_LANG %}
+
+                <div class="settings-row">
+                    <span class="settings-label">{% trans "Language" %}:</span>
+
+                    <!-- ✅ Django i18n переключение -->
+                    <form action="{% url 'set_language' %}" method="post" class="lang-buttons">
+                        {% csrf_token %}
+                        <input type="hidden" name="next" value="{{ request.get_full_path }}">
+
+                        <button type="submit"
+                                name="language"
+                                value="en"
+                                class="lang-btn {% if CUR_LANG == 'en' or CUR_LANG|slice:':2' == 'en' %}active{% endif %}">
+                            EN
+                        </button>
+
+                        <button type="submit"
+                                name="language"
+                                value="ru"
+                                class="lang-btn {% if CUR_LANG == 'ru' %}active{% endif %}">
+                            RU
+                        </button>
+
+                        <button type="submit"
+                                name="language"
+                                value="kk"
+                                class="lang-btn {% if CUR_LANG == 'kk' %}active{% endif %}">
+                            KZ
+                        </button>
+                    </form>
+                </div>
+
+                <div class="settings-row">
+                    <span class="settings-label">{% trans "Password" %}:</span>
+                    <span class="settings-value">•••••••</span>
+                </div>
+
+
+
+                <a href="{% url 'change_profile_data' %}" class="settings-btn">
+                    {% trans "Change profile" %}
+                </a>
+
+                <a href="{% url 'logout' %}" class="logout-btn">
+                    {% trans "Log out" %}
+                </a>
+
+            </div>
+
+            <a href="{% url back_url %}" class="groups-btn-home mainmenu-btn">
+                {% trans "Main menu" %}
+            </a>
+
+        </div>
+
+    </div>
+
+    <div class="phone__bottom"></div>
+</div>
+
+</body>
+</html>

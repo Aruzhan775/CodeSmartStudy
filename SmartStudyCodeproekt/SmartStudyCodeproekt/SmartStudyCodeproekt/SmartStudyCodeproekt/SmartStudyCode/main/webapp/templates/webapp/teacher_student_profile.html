@@ -1,0 +1,131 @@
+{% load static i18n %}
+<!DOCTYPE html>
+<html lang="{{ LANGUAGE_CODE }}">
+<head>
+  <meta charset="UTF-8">
+  <title>{% trans "Student Profile" %}</title>
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <style>
+    .profile-header{ font-size:22px !important; font-weight:900 !important; padding:18px 16px !important; border-radius:18px !important; text-align:center !important; }
+    .profile-card{ background:#f8fafc; border-radius:18px; padding:16px; box-shadow:0 10px 22px rgba(15, 23, 42, 0.08); margin-top:14px; }
+    .avatar-wrap{ display:flex; justify-content:center; margin-top:6px; }
+    .avatar{ width:120px; height:120px; border-radius:999px; background:#fff; display:flex; align-items:center; justify-content:center; box-shadow:0 10px 22px rgba(15, 23, 42, 0.12); overflow:hidden; }
+    .avatar img{ width:84%; height:auto; }
+    .info-row{ display:flex; justify-content:space-between; align-items:center; background:#eaf2ff; padding:12px 14px; border-radius:14px; margin-top:10px; font-weight:700; }
+    .tests-header{ margin-top:14px; font-weight:900; }
+
+    .history-kind{ display:inline-block; padding:2px 10px; border-radius:999px; font-weight:900; font-size:12px; margin-bottom:6px; background:#e2e8f0; color:#0f172a; }
+    .history-kind.basic{ background:#dcfce7; color:#14532d; }
+    .history-kind.teacher{ background:#dbeafe; color:#1e3a8a; }
+
+    .test-meta{ display:flex; gap:10px; flex-wrap:wrap; align-items:center; }
+
+    .btn-mini{
+      display:inline-block;
+      padding:6px 10px;
+      border-radius:12px;
+      font-weight:900;
+      font-size:12px;
+      text-decoration:none;
+      border:1px solid rgba(15,23,42,.15);
+      background:#0b1220;
+      color:#fff;
+    }
+  </style>
+</head>
+<body>
+
+<div class="phone">
+  <div class="phone__top"></div>
+
+  <div class="screen">
+    <div class="profile-header">{% trans "Profile" %}</div>
+
+    <div class="profile-card">
+      <div class="avatar-wrap">
+        <div class="avatar">
+          <img src="{% static 'img/student.png' %}" alt="{% trans 'Student' %}">
+        </div>
+      </div>
+
+      <div class="info-row">
+        <span>{% trans "Nickname" %}:</span>
+        <span>{{ student.username }}</span>
+      </div>
+
+      <div class="info-row">
+        <span>{% trans "Group" %}:</span>
+        <span>{{ group.name }}</span>
+      </div>
+
+      <div class="info-row">
+        <span>{% trans "Email" %}:</span>
+        <span>{{ student.email }}</span>
+      </div>
+
+      <div class="profile-stats" style="margin-top:14px;">
+        <div class="stat-card">
+          <div class="stat-title">{% trans "Attempts" %}</div>
+          <div class="stat-value">{{ total_attempts }}</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-title">{% trans "Average" %}</div>
+          <div class="stat-value">{{ avg_score|floatformat:1 }}</div>
+        </div>
+      </div>
+
+      <div class="profile-stats">
+        <div class="stat-card">
+          <div class="stat-title">{% trans "Best" %}</div>
+          <div class="stat-value">{{ best_score }}</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-title">{% trans "Student" %}</div>
+          <div class="stat-value">1</div>
+        </div>
+      </div>
+
+      <div class="tests-header">{% trans "Attempts overview" %}</div>
+
+      <div class="tests-list">
+        {% for h in history %}
+          <div class="test-item">
+            <div class="history-kind {% if h.kind == 'basic' %}basic{% else %}teacher{% endif %}">
+              {% if h.kind == "basic" %}{% trans "Basic" %}{% else %}{% trans "Teacher" %}{% endif %}
+            </div>
+
+            <div class="test-name">{{ h.title }}</div>
+
+            <div class="test-meta">
+              <span>{% trans "Topic" %}: {{ h.topic }}</span>
+              <span>{% trans "Author" %}: {{ h.author }}</span>
+              <span>{% trans "Score" %}: {{ h.score }} / 100</span>
+              <span>{% trans "Date" %}: {{ h.dt|date:"d.m.Y H:i" }}</span>
+
+              {% if h.kind == "teacher" %}
+                <a class="btn-mini"
+                   href="{% url 'teacher_attempt_preview' h.attempt_id %}?back={{ request.get_full_path|urlencode }}">
+                  {% trans "Preview" %}
+                </a>
+              {% else %}
+                <a class="btn-mini"
+                   href="{% url 'teacher_basic_attempt_preview' h.attempt_id %}?back={{ request.get_full_path|urlencode }}">
+                  {% trans "Preview" %}
+                </a>
+              {% endif %}
+            </div>
+          </div>
+        {% empty %}
+          <p class="small-text center">{% trans "No progress yet." %}</p>
+        {% endfor %}
+      </div>
+
+      <a href="{{ back_url }}" class="groups-btn-home">{% trans "Back" %}</a>
+    </div>
+  </div>
+
+  <div class="phone__bottom"></div>
+</div>
+
+</body>
+</html>

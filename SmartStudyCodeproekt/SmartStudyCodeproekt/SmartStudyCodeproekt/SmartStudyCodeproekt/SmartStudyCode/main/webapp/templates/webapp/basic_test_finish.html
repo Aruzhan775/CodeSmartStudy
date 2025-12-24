@@ -1,0 +1,128 @@
+{% load static i18n %}
+<!DOCTYPE html>
+<html lang="{{ LANGUAGE_CODE }}">
+<head>
+    <meta charset="UTF-8">
+    <title>{% trans "Test Result" %}</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <style>
+        .result-card {
+            width: 100%;
+            background: #f8fafc;
+            border-radius: 18px;
+            padding: 20px;
+            box-shadow: 0 12px 24px rgba(148, 163, 184, 0.4);
+            text-align: center;
+        }
+
+        .result-title {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: #0f172a;
+        }
+
+        .chart-wrap {
+            width: 180px;
+            height: 180px;
+            margin: 0 auto 16px;
+            border-radius: 50%;
+            background: conic-gradient(
+            #22c55e 0 var(--p),
+            #ef4444 0 100%
+        );
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .chart-inner {
+            width: 120px;
+            height: 120px;
+            background: #fff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            font-weight: 700;
+            color: #0f172a;
+        }
+
+        .result-stats {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 12px;
+            gap: 8px;
+        }
+
+        .stat-box {
+            flex: 1;
+            background: #e5edf9;
+            border-radius: 10px;
+            padding: 10px;
+            font-size: 16px;
+            margin: 0 auto 10px;
+        }
+
+        .btn-finish {
+            margin-top: 18px;
+            display: block;
+            width: 100%;
+            padding: 12px 0;
+            border-radius: 999px;
+            background: #2563eb;
+            color: #fff;
+            font-size: 16px;
+            font-weight: 600;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+
+<div class="phone">
+    <div class="phone__top"></div>
+
+    <div class="screen">
+
+        <div class="result-card">
+            <h2 class="result-title">{% trans "Test completed" %}</h2>
+
+            <div class="chart-wrap" style="--p: {{ correct_percent|default:0 }}%;">
+                <div class="chart-inner">{{ correct_percent|default:0 }}%</div>
+            </div>
+
+            <div class="stats-row">
+                <div class="stat-box">
+                    <span class="stat-icon">✔</span>
+                    <span class="stat-label">{% trans "Correct" %}</span>
+                    <span class="stat-value">{{ correct }}</span>
+                </div>
+
+                <div class="stat-box">
+                    <span class="stat-icon">✖</span>
+                    <span class="stat-label">{% trans "Incorrect" %}</span>
+                    <span class="stat-value">{{ incorrect }}</span>
+                </div>
+
+                <div class="stat-box">
+                    <span class="stat-icon">📋</span>
+                    <span class="stat-label">{% trans "Total" %}</span>
+                    <span class="stat-value">{{ total }}</span>
+                </div>
+            </div>
+
+            <a href="{% url 'student_menu' %}" class="groups-btn-home">
+                {% trans "Go to main menu" %}
+            </a>
+        </div>
+
+    </div>
+
+    <div class="phone__bottom"></div>
+</div>
+
+</body>
+</html>

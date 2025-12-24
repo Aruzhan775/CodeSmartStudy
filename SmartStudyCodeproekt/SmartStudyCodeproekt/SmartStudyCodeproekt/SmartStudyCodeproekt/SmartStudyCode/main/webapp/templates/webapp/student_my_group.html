@@ -1,0 +1,279 @@
+{% load static i18n %}
+<!DOCTYPE html>
+<html lang="{{ LANGUAGE_CODE }}">
+<head>
+  <meta charset="UTF-8">
+  <title>{% trans "Student" %} – {% trans "My group" %}</title>
+
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+  <style>
+    /* Keep your base phone styles, but make the inside more “modern card UI” */
+
+    *{ box-sizing:border-box; margin:0; padding:0; font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; }
+    body{ margin:0; background:#00a9ff; }
+
+    .phone{
+      width:100%;
+      max-width:420px;
+      height:100vh;
+      margin:0 auto;
+      background: linear-gradient(180deg,#020617,#0b1220);
+      display:flex;
+      flex-direction:column;
+      border-radius:12px;
+      overflow:hidden;
+      box-shadow:0 18px 40px rgba(15,23,42,.75);
+    }
+    .phone__top,.phone__bottom{ height:40px; background:#020617; }
+
+    .screen{
+      flex:1;
+      background:#e5edf9;
+      padding:18px 16px;
+      width:100%;
+      max-width:428px;
+      margin:0 auto;
+      display:flex;
+      flex-direction:column;
+      align-items:stretch;
+      overflow-y:auto;
+      gap:14px;
+    }
+
+    /* Page header */
+    .page-title{
+      width:100%;
+      background:#2563eb;
+      color:#fff;
+      text-align:center;
+      padding:14px 0;
+      font-weight:900;
+      font-size:18px;
+      border-radius:16px;
+      box-shadow:0 12px 24px rgba(37,99,235,.25);
+      letter-spacing:.2px;
+    }
+
+    /* Main info card */
+    .mygroup-card{
+      width:100%;
+      background: rgba(255,255,255,.80);
+      border-radius:18px;
+      padding:14px;
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+      box-shadow:0 12px 24px rgba(148,163,184,.55);
+      border:1px solid rgba(148,163,184,.30);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+    }
+
+    .mygroup-row{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:10px;
+      background:#eef4ff;
+      border-radius:12px;
+      padding:10px 12px;
+      font-size:14px;
+    }
+    .mygroup-label{ font-weight:700; color:#1e293b; }
+    .mygroup-value{ text-align:right; color:#0f172a; font-weight:900; }
+
+    /* Section block */
+    .section{
+      width:100%;
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+    }
+
+    .section-title{
+      width:100%;
+      background:#1f2937;
+      color:#fff;
+      text-align:center;
+      padding:10px 0;
+      font-weight:900;
+      font-size:15px;
+      border-radius:14px;
+      box-shadow:0 10px 20px rgba(15,23,42,.18);
+      letter-spacing:.2px;
+    }
+
+    .empty-text{
+      color:#475569;
+      text-align:center;
+      margin: 6px 0 2px;
+      font-size:14px;
+    }
+
+    /* Classmates list */
+    .list{
+      width:100%;
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+    }
+
+    .student-row{
+      background: rgba(255,255,255,.85);
+      border-radius:16px;
+      padding:12px 12px;
+      font-size:14px;
+      box-shadow:0 10px 22px rgba(148,163,184,.50);
+      border:1px solid rgba(148,163,184,.28);
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      color:#0f172a;
+    }
+    .student-name{ font-weight:800; }
+    .student-arrow{ color:#94a3b8; font-weight:900; font-size:18px; }
+
+    /* Tests list */
+    .test-row{
+      background: rgba(255,255,255,.85);
+      border-radius:16px;
+      padding:12px 12px;
+      box-shadow:0 10px 22px rgba(148,163,184,.50);
+      border:1px solid rgba(148,163,184,.28);
+      display:flex;
+      justify-content:space-between;
+      gap:12px;
+    }
+
+    .test-main{ display:flex; flex-direction:column; gap:4px; min-width:0; }
+    .test-name{ font-weight:900; color:#0f172a; font-size:14px; }
+    .test-topic{ color:#475569; font-size:12px; }
+
+    .test-meta{
+      display:flex;
+      flex-direction:column;
+      gap:4px;
+      color:#475569;
+      font-size:12px;
+      text-align:right;
+      min-width: 150px;
+      white-space:nowrap;
+    }
+    .test-meta b{ color:#0f172a; }
+
+    /* Bottom button */
+    .groups-btn-home{
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      width:100%;
+      margin-top: 4px;
+      padding:14px 0;
+      background:#374151;
+      color:#fff;
+      border-radius:16px;
+      text-decoration:none;
+      font-size:18px;
+      font-weight:800;
+      box-shadow:0 12px 24px rgba(55,65,81,.25);
+      transition: transform .12s ease, filter .12s ease;
+    }
+    .groups-btn-home:hover{
+      transform: translateY(-2px);
+      filter: brightness(0.98);
+    }
+  </style>
+</head>
+
+<body>
+<div class="phone">
+  <div class="phone__top"></div>
+
+  <div class="screen">
+
+    <div class="page-title">{% trans "My group" %}</div>
+
+    {% if not group %}
+      <p class="empty-text">{% trans "You are not assigned to any group yet." %}</p>
+    {% else %}
+
+      <div class="mygroup-card">
+        <div class="mygroup-row">
+          <span class="mygroup-label">{% trans "Group" %}</span>
+          <span class="mygroup-value">{{ group.name|default:"—" }}</span>
+        </div>
+
+        <div class="mygroup-row">
+          <span class="mygroup-label">{% trans "Teacher" %}</span>
+          <span class="mygroup-value">
+            {% if teacher %}{{ teacher.username }}{% else %}—{% endif %}
+          </span>
+        </div>
+
+        <div class="mygroup-row">
+          <span class="mygroup-label">{% trans "Students" %}</span>
+          <span class="mygroup-value">{{ students_count|default:"0" }}</span>
+        </div>
+
+        <div class="mygroup-row">
+          <span class="mygroup-label">{% trans "Tests" %}</span>
+          <span class="mygroup-value">{{ tests_count|default:"0" }}</span>
+        </div>
+      </div>
+
+      <!-- Classmates -->
+      <div class="section">
+        <div class="section-title">{% trans "Classmates" %}</div>
+
+        {% if classmates %}
+          <div class="list">
+            {% for st in classmates %}
+              <div class="student-row">
+                <span class="student-name">{{ st.nickname|default:st.user.username }}</span>
+                <span class="student-arrow">›</span>
+              </div>
+            {% endfor %}
+          </div>
+        {% else %}
+          <p class="empty-text">{% trans "No classmates in this group yet." %}</p>
+        {% endif %}
+      </div>
+
+      <!-- Assigned tests -->
+      <div class="section">
+        <div class="section-title">{% trans "Assigned tests" %}</div>
+
+        {% if assigned_tests %}
+          <div class="list">
+            {% for s in assigned_tests %}
+              <div class="test-row">
+                <div class="test-main">
+                  <div class="test-name">{{ s.test.title }}</div>
+                  <div class="test-topic">
+                    {% trans "Topic" %}: {{ s.test.topic.name|default:s.test.topic }}
+                  </div>
+                </div>
+
+                <div class="test-meta">
+                  <div>{{ s.scheduled_at|date:"d.m.Y H:i" }}</div>
+                  <div>{% trans "Questions" %}: <b>{{ s.questions_count }}</b></div>
+                </div>
+              </div>
+            {% endfor %}
+          </div>
+        {% else %}
+          <p class="empty-text">{% trans "No assigned tests yet." %}</p>
+        {% endif %}
+      </div>
+
+    {% endif %}
+
+    <a href="{% url 'student_menu' %}" class="groups-btn-home">{% trans "Main menu" %}</a>
+
+  </div>
+
+  <div class="phone__bottom"></div>
+</div>
+</body>
+</html>

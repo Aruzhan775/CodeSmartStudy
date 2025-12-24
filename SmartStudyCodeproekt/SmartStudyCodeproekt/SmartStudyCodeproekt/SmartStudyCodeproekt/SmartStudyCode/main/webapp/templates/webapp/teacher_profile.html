@@ -1,0 +1,206 @@
+{% load static i18n %}
+<!DOCTYPE html>
+<html lang="{{ LANGUAGE_CODE }}">
+<head>
+  <meta charset="UTF-8">
+  <title>{% trans "Teacher" %} – {% trans "Profile" %}</title>
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+  <style>
+    .screen{
+      padding-left:16px !important;
+      padding-right:16px !important;
+      box-sizing:border-box !important;
+    }
+
+    /* шапка как в остальных экранах */
+    .profile-header{
+      width:100% !important;
+      max-width:none !important;
+      box-sizing:border-box !important;
+
+      margin:10px 0 14px 0 !important;
+      padding:18px 16px !important;
+
+      border-radius:22px !important;
+      text-align:center !important;
+      font-size:22px !important;
+      font-weight:900 !important;
+    }
+
+    .profile-card{
+      width:100% !important;
+      max-width:none !important;
+      box-sizing:border-box !important;
+      border-radius:20px !important;
+      overflow:hidden;
+    }
+    /* ✅ прокрутка внутри карточки профиля */
+.profile-card{
+  max-height: calc(100vh - 170px); /* подгони если нужно */
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: 18px;
+}
+
+/* чтобы скролл был аккуратный */
+.profile-card::-webkit-scrollbar{ width: 8px; }
+.profile-card::-webkit-scrollbar-thumb{
+  background: rgba(15,23,42,.18);
+  border-radius: 999px;
+}
+.profile-card::-webkit-scrollbar-track{
+  background: transparent;
+}
+
+
+    .profile-avatar{
+      display:flex !important;
+      flex-direction:column !important;
+      align-items:center !important;
+      justify-content:center !important;
+      gap:10px !important;
+      margin-top: 2px;
+    }
+
+    .profile-avatar img{
+      width:140px !important;
+      height:140px !important;
+      object-fit:contain !important;
+      display:block !important;
+      filter: drop-shadow(0 10px 14px rgba(15,23,42,.14));
+    }
+
+    .profile-role{
+      text-align:center !important;
+      font-weight:900;
+      color:#0f172a;
+      padding:6px 14px;
+      border-radius:999px;
+      background:#eef4ff;
+      border:1px solid rgba(37,99,235,.18);
+    }
+
+    .profile-field{
+      border-radius:14px !important;
+    }
+
+    /* stats как “пилюли” */
+    .profile-stats{
+      display:grid !important;
+      grid-template-columns: 1fr 1fr !important;
+      gap:12px !important;
+      margin-top: 12px !important;
+    }
+
+    .stat-box{
+      border-radius:18px !important;
+      padding:16px 14px !important;
+      box-shadow:0 10px 22px rgba(15,23,42,.08);
+      border:1px solid rgba(148,163,184,.28);
+      background: rgba(255,255,255,.75);
+      text-align:center;
+    }
+
+    .stat-label{
+      font-weight:900;
+      color:#334155;
+      font-size:12px;
+      letter-spacing:.2px;
+      margin-bottom:6px;
+    }
+
+    .stat-value{
+      font-weight:900;
+      font-size:26px;
+      color:#0f172a;
+      line-height:1;
+    }
+
+    /* CTA “My tests” */
+    .profile-cta{
+      margin-top:16px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      width:100%;
+      padding:16px 18px;
+      border-radius:999px;
+      text-decoration:none;
+      font-size:18px;
+      font-weight:900;
+      background: linear-gradient(180deg, #38bdf8, #2563eb);
+      color:#fff;
+      box-shadow:0 16px 30px rgba(37,99,235,.22);
+      transition: transform .12s ease, filter .12s ease;
+    }
+    .profile-cta:hover{
+      transform: translateY(-2px);
+      filter: brightness(0.99);
+    }
+
+    .groups-btn-home{
+      margin-top:12px !important;
+      border-radius:18px !important;
+      padding:14px 0 !important;
+    }
+
+    @media (max-width: 380px){
+      .profile-stats{ grid-template-columns: 1fr !important; }
+    }
+  </style>
+</head>
+
+<body>
+<div class="phone">
+  <div class="phone__top"></div>
+
+  <div class="screen">
+
+    <div class="profile-header">{% trans "Profile" %}</div>
+
+    <div class="profile-card">
+
+      <div class="profile-avatar">
+        <img src="{% static 'img/teacher.png' %}" alt="{% trans 'Teacher' %}">
+        <div class="profile-role">{% trans "Teacher" %}</div>
+      </div>
+
+      <div class="profile-field">
+        <div class="profile-label">{% trans "Nickname" %}:</div>
+        <div class="profile-value">{{ user.username }}</div>
+      </div>
+
+      <div class="profile-field">
+        <div class="profile-label">{% trans "Email" %}:</div>
+        <div class="profile-value">{{ user.email }}</div>
+      </div>
+
+      <div class="profile-stats">
+        <div class="stat-box">
+          <div class="stat-label">{% trans "Number of tests" %}</div>
+          <div class="stat-value">{{ tests_count|default:"0" }}</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-label">{% trans "Number of groups" %}</div>
+          <div class="stat-value">{{ groups_count|default:"0" }}</div>
+        </div>
+      </div>
+
+      <a href="{% url 'teacher_tests' %}" class="profile-cta">
+        {% trans "My tests" %}
+      </a>
+
+      {% if back_url %}
+        <a href="{{ back_url }}" class="groups-btn-home">{% trans "Main menu" %}</a>
+      {% else %}
+        <a href="{% url 'teacher_menu' %}" class="groups-btn-home">{% trans "Main menu" %}</a>
+      {% endif %}
+
+    </div>
+  </div>
+
+  <div class="phone__bottom"></div>
+</div>
+</body>
+</html>

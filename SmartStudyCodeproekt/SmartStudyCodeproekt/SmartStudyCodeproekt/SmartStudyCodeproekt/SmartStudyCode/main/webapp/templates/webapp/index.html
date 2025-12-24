@@ -1,0 +1,106 @@
+{% load static i18n %}
+<!DOCTYPE html>
+<html lang="{{ LANGUAGE_CODE }}">
+<head>
+    <meta charset="UTF-8">
+    <title>{% trans "Welcome" %} – CodeSmartStudy</title>
+
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <style>
+      .screen{
+        position: relative;
+
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+        text-align: center;
+        gap: 22px;
+
+        padding: 48px 24px;
+      }
+
+      .lang-switch{
+        position: absolute;
+        top: 18px;
+        right: 18px;
+      }
+
+      .hero-image img{
+        width: 250px;
+        max-width: 85%;
+        height: auto;
+        display: block;
+      }
+
+      .welcome-text h1{
+        margin: 0;
+        font-size: 24px;
+        line-height: 1.2;
+      }
+
+      .welcome-text span{
+        display: block;
+        margin-top: 6px;
+        font-size: 36px;
+        font-weight: 800;
+        line-height: 1.1;
+      }
+
+      .btn.btn-outline{
+        padding: 14px 56px;
+        font-size: 18px;
+        border-radius: 999px;
+      }
+    </style>
+</head>
+<body>
+<div class="phone">
+    <div class="phone__top"></div>
+
+    <div class="screen">
+        <!-- Language switch (works with Django set_language view) -->
+        <div class="lang-switch" style="display:flex; gap:8px;">
+            <form action="{% url 'set_language' %}" method="post" style="display:inline;">
+                {% csrf_token %}
+                <input type="hidden" name="next" value="{{ request.get_full_path }}">
+                <input type="hidden" name="language" value="en">
+                <button type="submit"
+                        class="lang-switch__btn {% if LANGUAGE_CODE|slice:":2" == 'en' %}lang-switch__btn--active{% else %}lang-switch__btn--inactive{% endif %}">
+                    EN
+                </button>
+            </form>
+
+            <form action="{% url 'set_language' %}" method="post">
+  {% csrf_token %}
+  <input type="hidden" name="next" value="{{ request.get_full_path }}">
+  <input type="hidden" name="language" value="ru">
+  <button type="submit">RU</button>
+</form>
+
+
+            <form action="{% url 'set_language' %}" method="post">
+  {% csrf_token %}
+  <input type="hidden" name="next" value="{{ request.get_full_path }}">
+  <input type="hidden" name="language" value="kk">
+  <button type="submit">KZ</button>
+</form>
+
+
+        <div class="hero-image">
+            <img src="{% static 'img/boy.png' %}" alt="{% trans 'CodeSmartStudy hero' %}">
+        </div>
+
+        <div class="welcome-text">
+            <h1>{% trans "Welcome to" %}</h1>
+            <span>CodeSmartStudy</span>
+        </div>
+
+        <a href="{% url 'login_as' %}" class="btn btn-outline">{% trans "Start" %}</a>
+    </div>
+
+    <div class="phone__bottom"></div>
+</div>
+</body>
+</html>

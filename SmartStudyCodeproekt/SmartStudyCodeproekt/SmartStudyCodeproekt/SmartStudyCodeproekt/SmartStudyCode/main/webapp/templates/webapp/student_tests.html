@@ -1,0 +1,415 @@
+{% load static i18n tz %}
+<!DOCTYPE html>
+<html lang="{{ LANGUAGE_CODE }}">
+<head>
+  <meta charset="UTF-8">
+  <title>{% trans "Student" %} – {% trans "Tests" %}</title>
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+  <style>
+    .screen{
+      padding-left:16px !important;
+      padding-right:16px !important;
+      padding-bottom:14px !important;
+      box-sizing:border-box !important;
+    }
+
+    .profile-header{
+      width:100% !important;
+      max-width:none !important;
+      box-sizing:border-box !important;
+      padding:22px 16px !important;
+      margin:10px 0 14px 0 !important;
+      border-radius:22px !important;
+      font-size:22px !important;
+      font-weight:900 !important;
+    }
+
+    /* ===== tabs ===== */
+    .tests-tabs{
+      width:100% !important;
+      max-width:none !important;
+      box-sizing:border-box !important;
+      display:flex !important;
+      gap:0 !important;
+      justify-content:flex-start !important;
+      margin:0 0 14px 0 !important;
+      align-self:stretch !important;
+    }
+    .tests-tab{
+      flex:1 1 0 !important;
+      width:50% !important;
+      padding:14px 0 !important;
+      border-radius:0 !important;
+      display:flex !important;
+      align-items:center !important;
+      justify-content:center !important;
+      text-align:center !important;
+    }
+    .tests-tab:first-child{
+      border-top-left-radius:16px !important;
+      border-bottom-left-radius:16px !important;
+    }
+    .tests-tab:last-child{
+      border-top-right-radius:16px !important;
+      border-bottom-right-radius:16px !important;
+    }
+
+    /* ===== basic cards ===== */
+    .adaptive-tests-list{ width:100% !important; margin:0 !important; padding:0 !important; }
+    .test-row{ display:block !important; width:100% !important; margin:0 !important; padding:0 !important; text-decoration:none; }
+    .test-title{ margin:12px 0 8px 0 !important; padding:0 !important; }
+    .test-card{
+      width:100% !important;
+      min-height:130px !important;
+      border-radius:18px !important;
+      margin:0 !important;
+      display:flex !important;
+      flex-direction:column !important;
+      align-items:center !important;
+      justify-content:center !important;
+      text-align:center !important;
+      gap:8px !important;
+      padding:16px !important;
+    }
+    .python-logo{ display:block !important; margin:0 !important; position:static !important; transform:none !important; }
+    .python-label{ display:block !important; width:100% !important; margin:0 !important; position:static !important; text-align:center !important; }
+    .line{ width:100% !important; margin:14px 0 !important; }
+
+    .groups-btn-home{
+      width:100% !important;
+      margin:14px 0 6px 0 !important;
+      padding:14px 0 !important;
+      border-radius:18px !important;
+      box-sizing:border-box !important;
+    }
+
+    /* ===== Teacher list modern ===== */
+    .tests-teacher-list{
+      width:100% !important;
+      display:flex;
+      flex-direction:column;
+      gap:12px;
+      margin-top:4px;
+    }
+
+    .teacher-test-btn{
+      width:100%;
+      box-sizing:border-box;
+      display:flex;
+      justify-content:space-between;
+      gap:14px;
+
+      padding:14px 14px;
+      border-radius:18px;
+
+      background:rgba(255,255,255,.85);
+      border:1px solid rgba(148,163,184,.35);
+      box-shadow:0 12px 24px rgba(148,163,184,.45);
+
+      color:#0f172a;
+      text-decoration:none;
+
+      position:relative;
+      overflow:hidden;
+      transition:transform .12s ease, box-shadow .12s ease, filter .12s ease;
+    }
+    .teacher-test-btn:hover{
+      transform: translateY(-1px);
+      box-shadow:0 18px 30px rgba(148,163,184,.6);
+      filter: brightness(0.99);
+    }
+
+    .teacher-test-left,
+    .teacher-test-right{
+      display:flex;
+      flex-direction:column;
+      gap:6px;
+      min-width:0;
+      z-index:1;
+    }
+
+    .teacher-test-title{
+      font-weight:900;
+      font-size:16px;
+      line-height:1.15;
+      margin:0;
+      word-break:break-word;
+    }
+    .teacher-test-small{
+      font-size:13px;
+      color:#334155;
+      line-height:1.25;
+      margin:0;
+      word-break:break-word;
+    }
+
+    .teacher-test-right{
+      text-align:right;
+      align-items:flex-end;
+    }
+
+    .q-badge{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding:2px 10px;
+      border-radius:999px;
+      background:#eef4ff;
+      border:1px solid rgba(37,99,235,.25);
+      color:#1e3a8a;
+      font-weight:900;
+      width:max-content;
+    }
+
+    /* status badge (Locked/Open) */
+    .status-badge{
+      position:absolute;
+      top:12px;
+      left:12px;
+      z-index:2;
+
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:6px 10px;
+      border-radius:999px;
+
+      font-size:12px;
+      font-weight:900;
+      letter-spacing:.2px;
+
+      box-shadow:0 10px 22px rgba(15,23,42,.10);
+      border:1px solid rgba(148,163,184,.35);
+      background:rgba(255,255,255,.9);
+      backdrop-filter: blur(2px);
+    }
+    .status-badge img{
+      width:18px;
+      height:18px;
+      object-fit:contain;
+      display:block;
+    }
+    .status-locked{ color:#991b1b; }
+    .status-open{ color:#14532d; }
+
+    /* locked look */
+    .teacher-test-btn.is-locked{
+      cursor:not-allowed;
+      border-left:6px solid #ef4444;
+    }
+    .teacher-test-btn.is-open{
+      border-left:6px solid #22c55e;
+    }
+    .teacher-test-btn.is-locked .teacher-test-left,
+    .teacher-test-btn.is-locked .teacher-test-right{ opacity:.45; }
+
+    @media (max-width: 380px){
+      .teacher-test-btn{ flex-direction:column; align-items:flex-start; }
+      .teacher-test-right{ align-items:flex-start; text-align:left; width:100%; }
+    }
+
+    /* toast */
+    .toast{
+      position:fixed;
+      left:50%;
+      bottom:20px;
+      transform:translateX(-50%);
+      background:#0b1220;
+      color:#fff;
+      padding:10px 14px;
+      border-radius:999px;
+      font-weight:900;
+      font-size:13px;
+      opacity:0;
+      pointer-events:none;
+      transition:opacity .15s ease;
+      z-index:9999;
+      box-shadow:0 14px 28px rgba(15,23,42,.25);
+    }
+    .toast.show{ opacity:1; }
+  </style>
+</head>
+
+<body>
+<div class="phone">
+  <div class="phone__top"></div>
+
+  <div class="screen">
+
+    <div class="profile-header">{% trans "Tests" %}</div>
+
+    <div class="tests-tabs">
+      <button class="tests-tab tests-tab--active" data-target="basic">{% trans "Basic tests" %}</button>
+      <button class="tests-tab" data-target="teacher">{% trans "Teacher tests" %}</button>
+    </div>
+
+    <!-- BASIC -->
+    <div class="tests-panel tests-panel--active" data-panel="basic">
+      <div class="adaptive-tests-list">
+
+        <a href="{% url 'adaptive_start' 'python-basics' %}" class="test-row">
+          <div class="test-title">{% trans "Python Basics" %}</div>
+          <div class="test-card">
+            <img src="{% static 'img/python.png' %}" class="python-logo" alt="Python">
+            <span class="python-label">Python</span>
+          </div>
+        </a>
+
+        <div class="line"></div>
+
+        <a href="{% url 'adaptive_start' 'logic-structures' %}" class="test-row">
+          <div class="test-title">{% trans "Logic and Data Structures" %}</div>
+          <div class="test-card">
+            <img src="{% static 'img/python.png' %}" class="python-logo" alt="Python">
+            <span class="python-label">Python</span>
+          </div>
+        </a>
+
+        <div class="line"></div>
+
+        <a href="{% url 'adaptive_start' 'files-exceptions-functions' %}" class="test-row">
+          <div class="test-title">{% trans "Files, Exceptions, Functions" %}</div>
+          <div class="test-card">
+            <img src="{% static 'img/python.png' %}" class="python-logo" alt="Python">
+            <span class="python-label">Python</span>
+          </div>
+        </a>
+
+      </div>
+    </div>
+
+    <!-- TEACHER -->
+    <div class="tests-panel" data-panel="teacher">
+      {% if teacher_schedules %}
+        <div class="tests-teacher-list">
+          {% for s in teacher_schedules %}
+            <a
+              class="teacher-test-btn is-locked"
+              href="#"
+              data-open-at-ts="{{ s.scheduled_at|date:'U' }}"
+              data-start-url="/student/teacher-tests/{{ s.id }}/start/"
+            >
+              <div class="status-badge status-locked">
+                <img class="status-icon" src="{% static 'img/zakrito.png.png' %}" alt="{% trans 'Locked' %}">
+                <span class="status-text">{% trans "Locked" %}</span>
+              </div>
+
+              <div class="teacher-test-left">
+                <div class="teacher-test-title">{% trans "Test" %}: {{ s.test.title }}</div>
+                <div class="teacher-test-small">{% trans "Topic" %}: {{ s.test.topic.name|default:s.test.topic }}</div>
+                <div class="teacher-test-small">{% trans "Difficulty" %}: {{ s.test.difficulty }}</div>
+                <div class="teacher-test-small">{% trans "Author" %}: {{ s.test.created_by.username }}</div>
+              </div>
+
+              <div class="teacher-test-right">
+                <div class="teacher-test-small">{% trans "Group" %}: {{ s.group.name }}</div>
+                <div class="teacher-test-small">{% trans "Time" %}: {{ s.scheduled_at|localtime|date:"d.m.Y H:i" }}</div>
+                <div class="teacher-test-small">{% trans "Questions" %}: <span class="q-badge">{{ s.questions_count }}</span></div>
+              </div>
+            </a>
+          {% endfor %}
+        </div>
+      {% else %}
+        <p class="tests-empty">{% trans "No teacher tests have been scheduled for your group yet." %}</p>
+      {% endif %}
+    </div>
+
+    <a href="{% url 'student_menu' %}" class="groups-btn-home">{% trans "Main menu" %}</a>
+
+  </div>
+
+  <div class="phone__bottom"></div>
+</div>
+
+<div id="toast" class="toast">{% trans "Test is locked yet" %}</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  // tabs
+  const tabs = document.querySelectorAll('.tests-tab');
+  const panels = document.querySelectorAll('.tests-panel');
+
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      const target = tab.dataset.target;
+
+      tabs.forEach(t => t.classList.remove('tests-tab--active'));
+      tab.classList.add('tests-tab--active');
+
+      panels.forEach(p => {
+        if (p.dataset.panel === target) p.classList.add('tests-panel--active');
+        else p.classList.remove('tests-panel--active');
+      });
+    });
+  });
+
+  // lock logic
+  const CLOSED_SRC = "{% static 'img/zakrito.png.png' %}";
+  const OPEN_SRC   = "{% static 'img/otkrito.png.png' %}";
+
+  const toast = document.getElementById('toast');
+  let toastT = null;
+  function showToast(msg){
+    if (!toast) return;
+    toast.textContent = msg;
+    toast.classList.add('show');
+    clearTimeout(toastT);
+    toastT = setTimeout(() => toast.classList.remove('show'), 1400);
+  }
+
+  function getOpenAtUnix(card){
+    const ts = (card.dataset.openAtTs || "").trim();
+    const n = parseInt(ts, 10);
+    return Number.isFinite(n) ? n : 0;
+  }
+
+  function updateCard(card){
+    const openAt = getOpenAtUnix(card);              // seconds
+    const now = Math.floor(Date.now() / 1000);       // seconds
+
+    const startUrl = card.dataset.startUrl || "#";
+    const isOpen = (openAt > 0 && now >= openAt);
+
+    const badge = card.querySelector('.status-badge');
+    const icon = card.querySelector('.status-icon');
+    const text = card.querySelector('.status-text');
+
+    if (isOpen){
+      card.classList.remove('is-locked');
+      card.classList.add('is-open');
+      card.href = startUrl;
+      card.dataset.locked = "0";
+
+      if (badge) { badge.classList.remove('status-locked'); badge.classList.add('status-open'); }
+      if (icon) { icon.src = OPEN_SRC; icon.alt = "Open"; }
+      if (text) { text.textContent = "{% trans 'Open' %}"; }
+    } else {
+      card.classList.add('is-locked');
+      card.classList.remove('is-open');
+      card.href = "#";
+      card.dataset.locked = "1";
+
+      if (badge) { badge.classList.add('status-locked'); badge.classList.remove('status-open'); }
+      if (icon) { icon.src = CLOSED_SRC; icon.alt = "Locked"; }
+      if (text) { text.textContent = "{% trans 'Locked' %}"; }
+    }
+  }
+
+  const cards = Array.from(document.querySelectorAll('.teacher-test-btn[data-open-at-ts]'));
+  cards.forEach(c => {
+    updateCard(c);
+    c.addEventListener('click', (e) => {
+      if (c.dataset.locked === "1"){
+        e.preventDefault();
+        showToast("{% trans 'Test is locked yet' %}");
+      }
+    });
+  });
+
+  setInterval(() => cards.forEach(updateCard), 1000);
+});
+</script>
+
+</body>
+</html>

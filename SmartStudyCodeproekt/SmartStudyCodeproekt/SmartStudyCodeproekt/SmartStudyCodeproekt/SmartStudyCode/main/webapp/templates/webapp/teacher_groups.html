@@ -1,0 +1,325 @@
+{% load static i18n %}
+<!DOCTYPE html>
+<html lang="{{ LANGUAGE_CODE }}">
+<head>
+  <meta charset="UTF-8" />
+  <title>{% trans "Teacher" %} – {% trans "Groups" %}</title>
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+  <style>
+    .screen{ padding-left:16px; padding-right:16px; box-sizing:border-box; }
+
+    .groups-header{
+      font-size:22px !important;
+      font-weight:900 !important;
+      padding:18px 16px !important;
+      border-radius:18px !important;
+      text-align:center !important;
+      margin-top:10px;
+    }
+
+    /* ===== language switch (visual) ===== */
+    .lang-row{
+      width:100%;
+      display:flex;
+      justify-content:center;
+      margin:10px 0 12px;
+    }
+    .lang-pill{
+      display:inline-flex;
+      background:#ffffff;
+      border:1px solid rgba(148,163,184,.35);
+      border-radius:999px;
+      overflow:hidden;
+      box-shadow:0 10px 22px rgba(15,23,42,.08);
+    }
+    .lang-pill a{
+      padding:10px 14px;
+      font-weight:900;
+      font-size:13px;
+      text-decoration:none;
+      color:#0f172a;
+      opacity:.6;
+    }
+    .lang-pill a.active{
+      background:#2563eb;
+      color:#fff;
+      opacity:1;
+    }
+
+    /* ===== groups list ===== */
+    .groups-card{ width:100%; }
+
+    .groups-list{
+      display:flex;
+      flex-direction:column;
+      gap:12px;
+      margin-top:6px;
+    }
+
+    .group-block{
+      width:100%;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:12px;
+
+      padding:14px 14px;
+      border-radius:18px;
+
+      background:#ffffff;
+      border:1px solid rgba(148,163,184,.35);
+      box-shadow:0 12px 24px rgba(148,163,184,.45);
+
+      text-decoration:none !important;
+      color:#0f172a !important;
+
+      transition: transform .12s ease, box-shadow .12s ease;
+    }
+    .group-block:hover{
+      transform: translateY(-1px);
+      box-shadow:0 18px 30px rgba(148,163,184,.6);
+    }
+
+    .group-block--active{
+      border-left:6px solid #2563eb;
+      background: #eef4ff;
+    }
+
+    .group-block-left{ min-width:0; display:flex; flex-direction:column; gap:4px; }
+    .group-block-name{ font-weight:900; font-size:16px; line-height:1.2; word-break:break-word; }
+    .group-block-sub{ font-size:12px; color:#64748b; font-weight:700; }
+
+    .group-block-right{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      font-weight:900;
+      flex:0 0 auto;
+    }
+    .group-block-count{
+      font-size:12px;
+      padding:4px 10px;
+      border-radius:999px;
+      background:#e5edf9;
+      color:#0f172a;
+      border:1px solid rgba(148,163,184,.35);
+      white-space:nowrap;
+    }
+    .group-block-arrow{
+      font-size:18px;
+      opacity:.8;
+    }
+
+    /* ===== detail card ===== */
+    .group-detail-card{
+      width:100%;
+      background: rgba(255,255,255,.72);
+      border-radius:18px;
+      padding:16px;
+      box-shadow:0 12px 24px rgba(148,163,184,.45);
+      border:1px solid rgba(148,163,184,.35);
+    }
+    .group-detail-title{
+      font-size:18px;
+      font-weight:900;
+      color:#0f172a;
+      margin-bottom:12px;
+      text-align:center;
+    }
+
+    /* ===== students list row ===== */
+    .students-list{ display:flex; flex-direction:column; gap:10px; }
+
+    .student-row{
+      background:#f1f5f9;
+      border-radius:14px;
+      padding:12px 12px;
+      box-shadow:0 8px 18px rgba(148,163,184,.35);
+      display:flex;
+      justify-content:space-between;
+      gap:12px;
+      align-items:center;
+    }
+
+    .student-name{ font-weight:900; color:#0f172a; min-width:0; }
+    .student-name .small-text{ margin-top:2px; }
+
+    .student-actions{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      flex:0 0 auto;
+    }
+
+    .student-icon-link{
+      text-decoration:none;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+    .student-icon{
+      width:42px;
+      height:42px;
+      border-radius:999px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background:rgba(15,23,42,.06);
+      font-size:18px;
+      border:1px solid rgba(148,163,184,.35);
+    }
+    .student-check{
+      width:18px;
+      height:18px;
+      accent-color:#2563eb;
+    }
+
+    /* ===== restore block ===== */
+    .restore-target{
+      margin:14px 0 10px;
+      display:flex;
+      gap:10px;
+      align-items:center;
+      justify-content:center;
+      flex-wrap:wrap;
+    }
+    .restore-target label{ font-weight:900; color:#0f172a; }
+    .restore-target select{
+      border-radius:12px;
+      padding:10px 12px;
+      border:1px solid rgba(148,163,184,.45);
+      background:#fff;
+      font-weight:800;
+    }
+
+    .groups-btn-home{
+      width:100% !important;
+      margin-top:14px !important;
+      border-radius:18px !important;
+      padding:14px 0 !important;
+      box-sizing:border-box !important;
+    }
+  </style>
+</head>
+
+<body>
+<div class="phone">
+  <div class="phone__top"></div>
+
+  <div class="screen">
+
+    <div class="groups-header">{% trans "Groups" %}</div>
+
+    <!-- language switch (visual) -->
+    <div class="lang-row">
+      <div class="lang-pill">
+        <a href="?lang=en" class="{% if LANGUAGE_CODE|slice:':2' == 'en' %}active{% endif %}">EN</a>
+        <a href="?lang=ru" class="{% if LANGUAGE_CODE|slice:':2' == 'ru' %}active{% endif %}">RU</a>
+        <a href="?lang=kk" class="{% if LANGUAGE_CODE|slice:':2' == 'kk' %}active{% endif %}">KZ</a>
+      </div>
+    </div>
+
+    <div class="groups-card">
+      <div class="groups-list">
+        {% for g in groups %}
+          <a href="{% url 'teacher_groups' %}?group_id={{ g.id }}"
+             class="group-block {% if active_group and g.id == active_group.id %}group-block--active{% endif %}">
+            <div class="group-block-left">
+              <div class="group-block-name">{{ g.name }}</div>
+              <div class="group-block-sub">{% trans "Open group" %}</div>
+            </div>
+
+            <div class="group-block-right">
+              <div class="group-block-count">
+                {{ g.studentsgroups_set.count }} {% trans "students" %}
+              </div>
+              <div class="group-block-arrow">➜</div>
+            </div>
+          </a>
+        {% empty %}
+          <div class="small-text center">{% trans "No groups yet." %}</div>
+        {% endfor %}
+      </div>
+
+      <div class="groups-actions" style="margin-top:14px;">
+        <a href="{% url 'create_group' %}" class="groups-btn groups-btn-green">{% trans "Create group" %}</a>
+        <a href="{% url 'create_test' %}" class="groups-btn groups-btn-dark">{% trans "Create test" %}</a>
+      </div>
+    </div>
+
+    <div class="group-detail-card" style="margin-top: 16px;">
+      {% if active_group %}
+        <div class="group-detail-title">{{ active_group.name }}</div>
+
+        <form method="post" action="{% url 'teacher_groups' %}">
+          {% csrf_token %}
+          <input type="hidden" name="group_id" value="{{ active_group.id }}">
+
+          <div class="students-list">
+            {% for link in active_group.studentsgroups_set.all %}
+              <div class="student-row">
+                <div class="student-name">
+                  {{ link.student.username }}
+                  <div class="small-text">{{ link.student.email }}</div>
+                </div>
+
+                <div class="student-actions">
+                  <a class="student-icon-link"
+                     href="{% url 'teacher_student_profile' link.student.id %}"
+                     title="{% trans 'Open profile' %}"
+                     aria-label="{% trans 'Open profile' %}">
+                    <div class="student-icon">👤</div>
+                  </a>
+
+                  <input type="checkbox"
+                         class="student-check"
+                         name="selected_students"
+                         value="{{ link.student.id }}">
+                </div>
+              </div>
+            {% empty %}
+              <div class="small-text center">{% trans "No students in this group yet." %}</div>
+            {% endfor %}
+          </div>
+
+          {% if active_group.name != "UNGROUPED" %}
+            <button type="submit" name="action" value="remove" class="groups-remove-btn" style="margin-top:14px;">
+              {% trans "Remove selected" %}
+            </button>
+          {% else %}
+            <div class="restore-target">
+              <label for="target_group_id">{% trans "Restore to" %}:</label>
+              <select name="target_group_id" id="target_group_id">
+                {% for gr in groups %}
+                  {% if gr.name != "UNGROUPED" %}
+                    <option value="{{ gr.id }}">{{ gr.name }}</option>
+                  {% endif %}
+                {% endfor %}
+              </select>
+            </div>
+
+            <button type="submit" name="action" value="restore" class="groups-restore-btn">
+              {% trans "Restore selected" %}
+            </button>
+          {% endif %}
+
+          <a href="{% url 'teacher_menu' %}" class="groups-btn-home">{% trans "Main menu" %}</a>
+        </form>
+      {% else %}
+        <div class="small-text center">{% trans "Create a group to start." %}</div>
+        <a href="{% url 'create_group' %}" class="groups-btn groups-btn-green" style="margin-top: 12px;">
+          {% trans "Create group" %}
+        </a>
+        <a href="{% url 'teacher_menu' %}" class="groups-btn-home" style="margin-top: 12px;">
+          {% trans "Main menu" %}
+        </a>
+      {% endif %}
+    </div>
+
+  </div>
+
+  <div class="phone__bottom"></div>
+</div>
+</body>
+</html>
